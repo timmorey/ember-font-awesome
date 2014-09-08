@@ -6,7 +6,7 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "https://github.com/lfridael",
+  "author": "laurens.fridael@gmail.com",
   "license": {
     "type": "Public Domain",
     "url": "https://raw.githubusercontent.com/lfridael/ember-cli-font-awesome/master/UNLICENSE"
