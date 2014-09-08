@@ -1,6 +1,6 @@
 # ember-cli-font-awesome
 
-An [ember-cli](http://www.ember-cli.com/) addon for using [Font Awesome](http://fortawesome.github.io/Font-Awesome/) icons in Ember applications.
+An ember-cli addon for using Font Awesome icons in Ember applications.
 
 Basically this addon does the following:
 
