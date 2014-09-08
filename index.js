@@ -22,7 +22,7 @@ function unwatchedTree(dir) {
 EmberCliFontAwesome.prototype.treeFor = function treeFor(name) {
   var treePath = path.join("node_modules", ADDON_NAME);
   if (name === "vendor") {
-    // Map the 'vendor' tree to 'node_modules'.
+    // Map 'node_modules' to 'vendor', so that we can import Font Awesome assets later.
     treePath =  path.join(treePath, "node_modules");
   } else {
     // otherwise just append '-add-on';
