@@ -7,8 +7,11 @@
     "node": ">= 0.10.0"
   },
   "author": "https://github.com/lfridael",
-  "license": "Public Domain",
+  "license": {
+    "type": "Public Domain",
+    "url": "https://raw.githubusercontent.com/lfridael/ember-cli-font-awesome/master/UNLICENSE"
+  },
   "dependencies": {
-    "font-awesome": "^4.2.0"
+    "font-awesome": "4.2.0"
   }
 }
