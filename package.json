@@ -1,0 +1,14 @@
+{
+  "name": "ember-cli-font-awesome",
+  "version": "0.0.1",
+  "repository": "https://github.com/lfridael/ember-cli-font-awesome",
+  "keywords": [ "ember-addon" ],
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "author": "https://github.com/lfridael",
+  "license": "Public Domain",
+  "dependencies": {
+    "font-awesome": "^4.2.0"
+  }
+}
