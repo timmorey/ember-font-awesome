@@ -105,6 +105,17 @@ Fixed width icons:
 </div>
 ```
 
+Bordered & pulled icons:
+
+```
+<p>
+{{fa-icon "quote-left" pull="left" border=true}}
+...tomorrow we will run faster, stretch out our arms farther...
+And then one fine morning— So we beat on, boats against the
+current, borne back ceaselessly into the past.
+</p>
+```
+
 ## How do I prevent the addon from including Font Awesome CSS and fonts?
 
 Pass this option to the `EmberApp` constructor in your application's `Brocfile.js`:
