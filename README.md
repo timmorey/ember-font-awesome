@@ -116,7 +116,7 @@ current, borne back ceaselessly into the past.
 </p>
 ```
 
-## How do I prevent the addon from including Font Awesome CSS and fonts?
+## How do I prevent the addon from including Font Awesome assets?
 
 Pass this option to the `EmberApp` constructor in your application's `Brocfile.js`:
 
@@ -126,9 +126,33 @@ var app = new EmberApp({
 });
 ```
 
-You can then manage the Font Awesome dependency yourself.
+Now the CSS and font files will not be included in your app.
 
-Managing Font Awesome separately might be more practical. This addon includes Font Awesome by default simply to give developers a better out-of-the-box experience.
+This addon includes Font Awesome by default mainly to give you a better out-of-the-box experience. However, I recommend that you manage the use of Font Awesome through Bower instead.
+
+## Including Font Awesome in your app using Bower
+
+This should be straightforward for anyone familiar with ember-cli's handling of front-end dependencies through Bower.
+
+```
+# From your application's directory
+bower install --save font-awesome
+```
+
+Then in your `Brocfile.js`:
+
+```
+/*
+  This example is more verbose than necessary for the sake of illustration.
+  You could, for example, include the Font Awesome assets as a Broccoli tree.
+*/
+app.import("bower_components/font-awesome/css/font-awesome.css");
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
+app.import("bower_components/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
+```
 
 ## License
 
