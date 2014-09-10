@@ -9,9 +9,8 @@ module.exports = {
     if (name === 'vendor') {
       // Map 'node_modules' to 'vendor', so that we can import Font Awesome assets later.
       return this.treeGenerator(path.join(__dirname, 'node_modules'));
-    } else {
-      // otherwise just call super
-      return this._super.treeFor(name);
+    } else if (name === 'app') {
+      return this.treeGenerator(path.join(__dirname, 'app-addon'));
     }
   },
 
@@ -27,4 +26,4 @@ module.exports = {
       app.import("vendor/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
     }
   }
-}
+};
