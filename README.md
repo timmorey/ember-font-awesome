@@ -82,11 +82,28 @@ Spin:
 {{fa-icon "refresh" spin=isLoading}}
 ```
 
-Coming soon, support for:
+List icons:
 
-* List icons
-* Fixed width icons
-* Bordered and pulled icons.
+```
+<ul class="fa-ul">
+  <li>
+    {{fa-icon "star" listItem=true}} Item
+  </li>
+</ul>
+```
+
+Fixed width icons:
+
+```
+<div class="list-group">
+  <a class="list-group-item" href="#">
+    {{fa-icon "home" fixedWidth=true}} Home
+  </a>
+  <a class="list-group-item" href="#">
+    {{fa-icon "book" fixedWidth=true}} Library
+  </a>
+</div>
+```
 
 ## How do I prevent the addon from including Font Awesome CSS and fonts?
 

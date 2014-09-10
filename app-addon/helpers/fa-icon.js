@@ -33,6 +33,12 @@ var faIcon = function(name, options) {
   if (params.x) {
     classNames.push("fa-" + params.x + "x");
   }
+  if (params.fixedWidth) {
+    classNames.push("fa-fw");
+  }
+  if (params.listItem) {
+    classNames.push("fa-li");
+  }
   var html = "<i class='" + classNames.join(" ") + "'></i>";
   return new Ember.Handlebars.SafeString(html);
 };
