@@ -16,7 +16,7 @@ For the sake of clarity: this is an [ember-cli](http://www.ember-cli.com) addon,
 npm install --save-dev ember-cli-font-awesome
 ```
 
-This addon has been developed and tested against ember-cli 0.0.44 and uses Font Awesome 4.2.
+This addon works with ember-cli v0.0.43 and later.
 
 ## Basic usage
 
