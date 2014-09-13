@@ -143,9 +143,7 @@ var app = new EmberApp({
 });
 ```
 
-Now the CSS and font files will not be included in your app.
-
-This addon includes Font Awesome by default mainly to give you a better out-of-the-box experience. However, I recommend that you manage the use of Font Awesome through Bower instead.
+The CSS and font files will then not be included in your app. Managing the Font Awesome assets yourself is what I would recommend doing for production apps. See the note below on how to do this with Bower. This addon includes the Font Awesome assets by default mainly for a better out-of-the-box experience.
 
 ## Including Font Awesome in your app using Bower
 
