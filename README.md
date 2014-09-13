@@ -116,6 +116,14 @@ current, borne back ceaselessly into the past.
 </p>
 ```
 
+Custom class names (new in v0.0.4)
+
+```
+{{fa-icon "bicycle" classNames="my-custom-class"}}
+{{!-- results in: --}}
+<i class="fa fa-bicycle my-custom-class"></i>
+```
+
 ## How do I prevent the addon from including Font Awesome assets?
 
 Pass this option to the `EmberApp` constructor in your application's `Brocfile.js`:

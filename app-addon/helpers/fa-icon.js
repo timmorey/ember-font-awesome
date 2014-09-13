@@ -10,7 +10,8 @@ import Ember from 'ember';
  */
 var faIcon = function(name, options) {
   var params = options.hash,
-    classNames = [];
+    classNames = [],
+    html = "";
 
   classNames.push("fa");
   if (name.match(/^fa\-.*/)) {
@@ -45,7 +46,16 @@ var faIcon = function(name, options) {
   if (params.border) {
     classNames.push("fa-border");
   }
-  var html = "<i class='" + classNames.join(" ") + "'></i>";
+  if (params.classNames && !Ember.isArray(params.classNames)) {
+    params.classNames = [ params.classNames ];
+  }
+  if (!Ember.isEmpty(params.classNames)) {
+    Array.prototype.push.apply(classNames, params.classNames);
+  }
+
+  html += "<i";
+  html += " class='" + classNames.join(" ") + "'";
+  html += "></i>";
   return new Ember.Handlebars.SafeString(html);
 };
 
