@@ -55,6 +55,9 @@ var faIcon = function(name, options) {
 
   html += "<i";
   html += " class='" + classNames.join(" ") + "'";
+  if (params.title) {
+    html += " title='" + params.title + "'";
+  }
   html += "></i>";
   return new Ember.Handlebars.SafeString(html);
 };
