@@ -45,9 +45,9 @@ You can also bind the icon name to a controller or model property:
 
 ## Options
 
-The [Font Awesome examples](http://fortawesome.github.io/Font-Awesome/examples/) illustrate the various options and their effects. It should be obvious how these options map to `fa-icon` options.
+The [Font Awesome examples](http://fortawesome.github.io/Font-Awesome/examples/) illustrate the various options and their effects. It should be obvious how these options map to their `fa-icon` counterparts.
 
-Different icon sizes:
+### Different icon sizes
 
 ```
 {{fa-icon "star"}}
@@ -58,7 +58,7 @@ Different icon sizes:
 {{fa-icon "star" x=5}}
 ```
 
-Rotate:
+### Rotate
 
 ```
 {{fa-icon "camera" rotate=90}}
@@ -66,14 +66,14 @@ Rotate:
 {{fa-icon "camera" rotate=270}}
 ```
 
-Flip:
+### Flip
 
 ```
 {{fa-icon "bicycle" flip="horizontal"}}
 {{fa-icon "car" flip="vertical"}}
 ```
 
-Spin:
+### Spin
 
 ```
 {{!-- using a boolean literal --}}
@@ -82,7 +82,7 @@ Spin:
 {{fa-icon "refresh" spin=isLoading}}
 ```
 
-List icons:
+### List icons
 
 ```
 <ul class="fa-ul">
@@ -92,7 +92,7 @@ List icons:
 </ul>
 ```
 
-Fixed width icons:
+### Fixed width icons
 
 ```
 <div class="list-group">
@@ -105,7 +105,7 @@ Fixed width icons:
 </div>
 ```
 
-Bordered & pulled icons:
+### Bordered & pulled icons
 
 ```
 <p>
@@ -116,12 +116,20 @@ current, borne back ceaselessly into the past.
 </p>
 ```
 
-Custom class names (new in v0.0.4)
+### Custom class names (new in v0.0.4)
 
 ```
 {{fa-icon "bicycle" classNames="my-custom-class"}}
 {{!-- results in: --}}
 <i class="fa fa-bicycle my-custom-class"></i>
+```
+
+### Title attribute (new in v0.0.4)
+
+```
+{{fa-icon "edit" title="Edit the item"}}
+{{!-- results in: --}}
+<i class="fa fa-edit" title="Edit the item"></i>
 ```
 
 ## How do I prevent the addon from including Font Awesome assets?
