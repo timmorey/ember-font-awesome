@@ -1,5 +1,9 @@
 import Ember from 'ember';
 
+var FA_PREFIX = /^fa\-.+/;
+
+var warn = Ember.Logger.warn;
+
 /**
  * Handlebars helper for generating HTML that renders a FontAwesome icon.
  *
@@ -9,16 +13,21 @@ import Ember from 'ember';
  * @return {Ember.Handlebars.SafeString} The HTML markup.
  */
 var faIcon = function(name, options) {
+  if (Ember.typeOf(name) !== 'string') {
+    var message = "fa-icon: no icon specified";
+    warn(message);
+    return new Ember.Handlebars.SafeString(message);
+  }
+
   var params = options.hash,
     classNames = [],
     html = "";
 
   classNames.push("fa");
-  if (name.match(/^fa\-.*/)) {
-    classNames.push(name);
-  } else {
-    classNames.push("fa-" + name);
+  if (!name.match(FA_PREFIX)) {
+    name = "fa-" + name;
   }
+  classNames.push(name);
   if (params.spin) {
     classNames.push("fa-spin");
   }
@@ -29,10 +38,19 @@ var faIcon = function(name, options) {
     classNames.push("fa-rotate-" + params.rotate);
   }
   if (params.lg) {
+    warn("fa-icon: the 'lg' parameter is deprecated. Use 'size' instead. I.e. {{fa-icon size=\"lg\"}}");
     classNames.push("fa-lg");
   }
   if (params.x) {
+    warn("fa-icon: the 'x' parameter is deprecated. Use 'size' instead. I.e. {{fa-icon size=\"" + params.x + "\"}}");
     classNames.push("fa-" + params.x + "x");
+  }
+  if (params.size) {
+    if (Ember.typeOf(params.size) === "number") {
+      classNames.push("fa-" + params.size + "x");
+    } else {
+      classNames.push("fa-" + params.size);
+    }
   }
   if (params.fixedWidth) {
     classNames.push("fa-fw");

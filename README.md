@@ -47,16 +47,17 @@ You can also bind the icon name to a controller or model property:
 
 The [Font Awesome examples](http://fortawesome.github.io/Font-Awesome/examples/) illustrate the various options and their effects. It should be obvious how these options map to their `fa-icon` counterparts.
 
-### Different icon sizes
+### Different icon sizes (changed in v0.0.4)
 
 ```
-{{fa-icon "star"}}
-{{fa-icon "star" lg=true}}
-{{fa-icon "star" x=2}}
-{{fa-icon "star" x=3}}
-{{fa-icon "star" x=4}}
-{{fa-icon "star" x=5}}
+{{fa-icon "star" size="lg"}}
+{{fa-icon "star" size=2}}
+{{fa-icon "star" size=3}}
+{{fa-icon "star" size=4}}
+{{fa-icon "star" size=5}}
 ```
+
+The old icon size syntax is deprecated, but still supported, as of v0.0.4.
 
 ### Rotate
 
