@@ -43,6 +43,15 @@ You can also bind the icon name to a controller or model property:
 {{fa-icon menu.copyIcon}}
 ```
 
+if you know upfront that the icon will not change, you can use `unbound` to prevent a property binding from being created:
+
+```
+{{!-- Static icon --}}
+{{unbound fa-icon "camera"}}
+{{!-- Icon initialized with, but not bound to, a property}}
+{{unbound fa-icon iconName}}
+```
+
 ## Options
 
 The [Font Awesome examples](http://fortawesome.github.io/Font-Awesome/examples/) illustrate the various options and their effects. It should be obvious how these options map to their `fa-icon` counterparts.
