@@ -46,6 +46,9 @@ var faIcon = function(name, options) {
     classNames.push("fa-" + params.x + "x");
   }
   if (params.size) {
+    if (Ember.typeOf(params.size) === "string" && params.size.match(/\d+/)) {
+      params.size = Number(params.size);
+    }
     if (Ember.typeOf(params.size) === "number") {
       classNames.push("fa-" + params.size + "x");
     } else {
