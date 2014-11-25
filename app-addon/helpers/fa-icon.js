@@ -73,11 +73,17 @@ var faIcon = function(name, options) {
   if (!Ember.isEmpty(params.classNames)) {
     Array.prototype.push.apply(classNames, params.classNames);
   }
-
-  html += "<i";
+  
+  
+  html += "<";
+  var tagName = params.tagName || 'span';
+  html += tagName;
   html += " class='" + classNames.join(" ") + "'";
   if (params.title) {
     html += " title='" + params.title + "'";
+  }
+  if (params.ariaHidden === undefined || params.ariaHidden) {
+    html += " aria-hidden=\"true\"";
   }
   html += "></i>";
   return new Ember.Handlebars.SafeString(html);
