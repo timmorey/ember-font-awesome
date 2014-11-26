@@ -76,7 +76,7 @@ var faIcon = function(name, options) {
   
   
   html += "<";
-  var tagName = params.tagName || 'span';
+  var tagName = params.tagName || 'i';
   html += tagName;
   html += " class='" + classNames.join(" ") + "'";
   if (params.title) {
