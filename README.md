@@ -126,6 +126,34 @@ current, borne back ceaselessly into the past.
 </p>
 ```
 
+### aria-hidden attribute (new in v0.0.5)
+
+To better support accessibility (i.e. screen readers), the helper now generates an `aria-hidden` attribute by default:
+
+```
+{{fa-icon "star"}}
+{{!-- results in: --}}
+<i class="fa fa-star" aria-hidden="true"></i>
+```
+
+To remove the `aria-hidden` attribute:
+
+```
+{{fa-icon "star" ariaHidden=false}}
+{{!-- results in: --}}
+<i class="fa fa-star"></i>
+```
+
+### tag name (new in v0.0.5)
+
+Use `tagName` to control the generated markup:
+
+```
+{{fa-icon "star" tagName="span"}}
+{{!-- results in: --}}
+<span class="fa fa-star"></span>
+```
+
 ### Custom class names (new in v0.0.4)
 
 ```
