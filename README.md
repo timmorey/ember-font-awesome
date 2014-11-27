@@ -16,7 +16,9 @@ For the sake of clarity: this is an ember-cli addon, not a standalone module.
 npm install --save-dev ember-cli-font-awesome
 ```
 
-This addon works with ember-cli v0.0.43 and later.
+The current version of this addon (v0.0.5) should work with ember-cli v0.0.43 and later.
+
+Future versions of this addon (>=v0.0.6) will require ember-cli v0.1.x.
 
 ## Basic usage
 
