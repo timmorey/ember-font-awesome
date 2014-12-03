@@ -85,7 +85,7 @@ var faIcon = function(name, options) {
   if (params.ariaHidden === undefined || params.ariaHidden) {
     html += " aria-hidden=\"true\"";
   }
-  html += "></i>";
+  html += "></" + tagName + ">";
   return new Ember.Handlebars.SafeString(html);
 };
 
