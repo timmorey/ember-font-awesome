@@ -16,7 +16,7 @@ var faIcon = function(name, options) {
   if (Ember.typeOf(name) !== 'string') {
     var message = "fa-icon: no icon specified";
     warn(message);
-    return new Ember.Handlebars.SafeString(message);
+    return Ember.String.htmlSafe(message);
   }
 
   var params = options.hash,
@@ -73,8 +73,8 @@ var faIcon = function(name, options) {
   if (!Ember.isEmpty(params.classNames)) {
     Array.prototype.push.apply(classNames, params.classNames);
   }
-  
-  
+
+
   html += "<";
   var tagName = params.tagName || 'i';
   html += tagName;
@@ -86,7 +86,7 @@ var faIcon = function(name, options) {
     html += " aria-hidden=\"true\"";
   }
   html += "></" + tagName + ">";
-  return new Ember.Handlebars.SafeString(html);
+  return Ember.String.htmlSafe(html);
 };
 
 export {
