@@ -23,6 +23,7 @@ module.exports = {
       app.import("vendor/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
       app.import("vendor/font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "fonts" });
       app.import("vendor/font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
+      app.import("vendor/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
       app.import("vendor/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
     }
   }
