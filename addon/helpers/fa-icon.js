@@ -31,6 +31,9 @@ var faIcon = function(name, options) {
   if (params.spin) {
     classNames.push("fa-spin");
   }
+  if (params.pulse) {
+    classNames.push("fa-pulse");
+  }
   if (params.flip) {
     classNames.push("fa-flip-" + params.flip);
   }
@@ -46,7 +49,7 @@ var faIcon = function(name, options) {
     classNames.push("fa-" + params.x + "x");
   }
   if (params.size) {
-    if (Ember.typeOf(params.size) === "string" && params.size.match(/\d+/)) {
+    if (Ember.typeOf(params.size) === "string" && params.size.match(/^\d+$/)) {
       params.size = Number(params.size);
     }
     if (Ember.typeOf(params.size) === "number") {
@@ -66,6 +69,19 @@ var faIcon = function(name, options) {
   }
   if (params.border) {
     classNames.push("fa-border");
+  }
+  if (params.stack) {
+    if (Ember.typeOf(params.stack) === "string" && params.stack.match(/^\d+$/)) {
+      params.size = Number(params.stack);
+    }
+    if (Ember.typeOf(params.stack) === "number") {
+      classNames.push("fa-stack-" + params.stack + "x");
+    } else {
+      classNames.push("fa-stack-" + params.stack);
+    }
+  }
+  if (params.inverse) {
+    classNames.push("fa-inverse");
   }
   if (params.classNames && !Ember.isArray(params.classNames)) {
     params.classNames = [ params.classNames ];
