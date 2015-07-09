@@ -18,7 +18,7 @@ npm install --save-dev ember-cli-font-awesome
 
 The current version of this addon should work with ember-cli v0.0.43 and later.
 
-Future versions of this addon will require ember-cli v0.1.x.
+Future versions of this addon will require ember-cli v1.x.
 
 ## Basic usage
 
