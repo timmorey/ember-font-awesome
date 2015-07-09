@@ -55,7 +55,7 @@ if you know upfront that the icon will not change, you can use `unbound` to prev
 ```hbs
 {{!-- Static icon --}}
 {{unbound fa-icon "camera"}}
-{{!-- Icon initialized with, but not bound to, a property}}
+{{!-- Icon initialized with, but not bound to, a property --}}
 {{unbound fa-icon iconName}}
 ```
 
