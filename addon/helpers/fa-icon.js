@@ -12,16 +12,15 @@ var warn = Ember.Logger.warn;
  * @param  {Object} options Options passed to helper.
  * @return {Ember.Handlebars.SafeString} The HTML markup.
  */
-var faIcon = function(name, options) {
+var faIcon = function([name], params) {
   if (Ember.typeOf(name) !== 'string') {
     var message = "fa-icon: no icon specified";
     warn(message);
     return Ember.String.htmlSafe(message);
   }
 
-  var params = options.hash,
-    classNames = [],
-    html = "";
+  var classNames = [],
+      html = "";
 
   classNames.push("fa");
   if (!name.match(FA_PREFIX)) {
@@ -110,4 +109,4 @@ export {
 };
 
 export { faIcon };
-export default Ember.Handlebars.makeBoundHelper(faIcon);
+export default Ember.Helper.helper(faIcon);
