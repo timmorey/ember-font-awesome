@@ -93,4 +93,5 @@ export {
   faIcon
 };
 
+export { faIcon };
 export default Ember.Handlebars.makeBoundHelper(faIcon);
