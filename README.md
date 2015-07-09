@@ -11,10 +11,16 @@ This addon:
 
 ```bash
 # In your application's directory:
-$ npm install --save-dev ember-cli-font-awesome
-# Upgrade notice: from v0.1.0 onwards, you must install Font Awesome dependency manually.
-$ bower install --save-dev font-awesome
+$ ember install ember-cli-font-awesome
 ```
+
+If you have used `npm install` to install the addon, or have manually added
+`ember-cli-font-awesome` to your `package.json`:
+
+```bash
+ember generate ember-cli-font-awesome
+```
+
 ### Compatibility
 
 Note that from v0.1.0 onwards, this addon will require Ember v1.13 and has only been tested with Ember CLI v1.13.1.
