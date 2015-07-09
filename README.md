@@ -11,7 +11,9 @@ This addon:
 
 ```bash
 # In your application's directory:
-npm install --save-dev ember-cli-font-awesome
+$ npm install --save-dev ember-cli-font-awesome
+# Upgrade notice: from v0.1.0 onwards, you must install Font Awesome dependency manually.
+$ bower install --save-dev font-awesome
 ```
 ### Compatibility
 
@@ -63,7 +65,7 @@ if you know upfront that the icon will not change, you can use `unbound` to prev
 
 The [Font Awesome examples](http://fortawesome.github.io/Font-Awesome/examples/) illustrate the various options and their effects. It should be obvious how these options map to their `fa-icon` counterparts.
 
-### Different icon sizes (changed in v0.0.4)
+### Different icon sizes
 
 ```hbs
 {{fa-icon "star" size="lg"}}
@@ -99,7 +101,7 @@ The old icon size syntax is deprecated, but still supported, as of v0.0.4.
 {{fa-icon "refresh" spin=isLoading}}
 ```
 
-### Pulse
+### Pulse (new in v0.1.0)
 
 ```hbs
 {{fa-icon "spinner" pulse=true}}
@@ -154,7 +156,7 @@ current, borne back ceaselessly into the past.
 </span>
 ```
 
-### aria-hidden attribute (new in v0.0.5)
+### aria-hidden attribute
 
 To better support accessibility (i.e. screen readers), the helper now generates an `aria-hidden` attribute by default:
 
@@ -172,7 +174,7 @@ To remove the `aria-hidden` attribute:
 <i class="fa fa-star"></i>
 ```
 
-### tag name (new in v0.0.5)
+### tag name
 
 Use `tagName` to control the generated markup:
 
@@ -182,7 +184,7 @@ Use `tagName` to control the generated markup:
 <span class="fa fa-star"></span>
 ```
 
-### Custom class names (new in v0.0.4)
+### Custom class names
 
 ```hbs
 {{fa-icon "bicycle" classNames="my-custom-class"}}
@@ -190,7 +192,7 @@ Use `tagName` to control the generated markup:
 <i class="fa fa-bicycle my-custom-class"></i>
 ```
 
-### Title attribute (new in v0.0.4)
+### Title attribute
 
 ```hbs
 {{fa-icon "edit" title="Edit the item"}}
@@ -198,9 +200,21 @@ Use `tagName` to control the generated markup:
 <i class="fa fa-edit" title="Edit the item"></i>
 ```
 
-## How do I prevent the addon from including Font Awesome assets?
+## Importing Font Awesome assets
 
-Pass this option to the `EmberApp` constructor in your application's `Brocfile.js`:
+### Import automatically (default)
+
+By default, the addon imports Font Awesome assets automatically. (See [index.js](index.js) for details.)
+
+This works as long as the Bower dependency is present:
+
+```
+bower install --save-dev font-awesome
+```
+
+### Import manually
+
+To disable the default behaviour, pass this option to the `EmberApp` constructor in your application's `Brocfile.js`:
 
 ```js
 var app = new EmberApp({
@@ -208,31 +222,10 @@ var app = new EmberApp({
 });
 ```
 
-The CSS and font files will then not be included in your app. Managing the Font Awesome assets yourself is what I would recommend doing for production apps. See the note below on how to do this with Bower. This addon includes the Font Awesome assets by default mainly for a better out-of-the-box experience.
+You can then import the assets manually:
 
-## Including Font Awesome in your app using Bower
-
-This should be straightforward for anyone familiar with ember-cli's handling of front-end dependencies through Bower.
-
-```bash
-# From your application's directory
-bower install --save font-awesome
 ```
-
-Then in your `Brocfile.js`:
-
-```js
-/*
-  This example is more verbose than necessary for the sake of illustration.
-  You could, for example, include the Font Awesome assets as a Broccoli tree.
-*/
-app.import("bower_components/font-awesome/css/font-awesome.css");
-app.import("bower_components/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
-app.import("bower_components/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
-app.import("bower_components/font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "fonts" });
-app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
-app.import("bower_components/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
-app.import("bower_components/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
+app.import(app.bowerDirectory + "/font-awesome/css/font-awesome.css");
 ```
 
 ## License
