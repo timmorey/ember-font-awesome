@@ -7,18 +7,23 @@ This addon:
 * Registers a Handlebars helper for rendering Font Awesome icon markup.
 * Imports FontAwesome CSS and fonts into your app. (This can be disabled if necessary, see below.)
 
-## Install in ember-cli application
-
-For the sake of clarity: this is an ember-cli addon, not a standalone module.
+## Install
 
 ```
 # In your application's directory:
 npm install --save-dev ember-cli-font-awesome
 ```
+### Compatibility
 
-The current version of this addon should work with ember-cli v0.0.43 and later.
+Note that from v0.1.0 onwards, this addon will require Ember v1.13 and has only been tested with Ember CLI v1.13.1.
 
-Future versions of this addon will require ember-cli v1.x.
+*Note: v0.1.0 is the current development version on master and has not been released yet.*
+
+If you're using older versions of either Ember or Ember CLI, use v0.0.9 instead:
+
+```
+npm install --save-dev ember-cli-font-awesome@0.0.9
+```
 
 ## Basic usage
 
