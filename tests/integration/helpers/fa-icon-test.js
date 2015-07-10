@@ -5,7 +5,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 const { run } = Ember;
 
 // It's not really a component, but it works! :)
-moduleForComponent('fa-icon', {
+moduleForComponent('Integration | Helper | {{fa-icon}}', {
   integration: true
 });
 
@@ -166,4 +166,33 @@ test('aria-hidden', function(assert) {
 
   this.set('ariaHidden', false);
   assert.equal(this.$('.fa[aria-hidden]').length, 0);
+});
+
+test('classNames', function(assert) {
+  this.render(hbs`{{fa-icon 'credit-card' classNames=classNames}}`);
+
+  this.set('classNames', 'foo');
+  assert.equal(this.$('.foo').length, 1);
+
+  this.set('classNames', ['foo', 'bar']);
+  assert.equal(this.$('.foo.bar').length, 1);
+
+  this.set('classNames', 'foo bar');
+  assert.equal(this.$('.foo.bar').length, 1);
+});
+
+test('title', function(assert) {
+  this.render(hbs`{{fa-icon 'credit-card' title=title}}`);
+  assert.equal(this.$('.fa[title]').length, 0);
+
+  this.set('title', 'hello world');
+  assert.equal(this.$('.fa[title="hello world"]').length, 1);
+});
+
+test('tagName', function(assert) {
+  this.render(hbs`{{fa-icon 'credit-card' tagName=tagName}}`);
+  assert.equal(this.$('i').length, 1);
+
+  this.set('tagName', 'span');
+  assert.equal(this.$('span').length, 1);
 });
