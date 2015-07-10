@@ -2,32 +2,19 @@
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Font Awesome](http://fortawesome.github.io/Font-Awesome/) icons in Ember applications.
 
-This addon:
-
-* Registers a Handlebars helper for rendering Font Awesome icon markup.
-* Imports FontAwesome CSS and fonts into your app. (This can be disabled if necessary, see below.)
-
 ## Install
 
 ```bash
 # In your application's directory:
 $ ember install ember-cli-font-awesome
-```
-
-If you have used `npm install` to install the addon, or have manually added
-`ember-cli-font-awesome` to your `package.json`:
-
-```bash
-ember generate ember-cli-font-awesome
+$ ember generate ember-cli-font-awesome
 ```
 
 ### Compatibility
 
-Note that from v0.1.0 onwards, this addon will require Ember v1.13 and has only been tested with Ember CLI v1.13.1.
+From v0.1.0 onwards this addon requires Ember v1.13 and Ember CLI v1.13.1.
 
-*Note: v0.1.0 is the current development version on master and has not been released yet.*
-
-If you're using older versions of either Ember or Ember CLI, use v0.0.9 instead:
+If you're using older versions of either Ember or Ember CLI, use v0.0.9 of instead:
 
 ```bash
 npm install --save-dev ember-cli-font-awesome@0.0.9
@@ -180,7 +167,7 @@ To remove the `aria-hidden` attribute:
 <i class="fa fa-star"></i>
 ```
 
-### tag name
+### Tag name
 
 Use `tagName` to control the generated markup:
 
@@ -206,34 +193,6 @@ Use `tagName` to control the generated markup:
 <i class="fa fa-edit" title="Edit the item"></i>
 ```
 
-## Importing Font Awesome assets
-
-### Import automatically (default)
-
-By default, the addon imports Font Awesome assets automatically. (See [index.js](index.js) for details.)
-
-This works as long as the Bower dependency is present:
-
-```
-bower install --save-dev font-awesome
-```
-
-### Import manually
-
-To disable the default behaviour, pass this option to the `EmberApp` constructor in your application's `Brocfile.js`:
-
-```js
-var app = new EmberApp({
-  emberCliFontAwesome: { includeFontAwesomeAssets: false }
-});
-```
-
-You can then import the assets manually:
-
-```
-app.import(app.bowerDirectory + "/font-awesome/css/font-awesome.css");
-```
-
 ## License
 
-Public Domain
+[Public Domain](UNLICENSE)
