@@ -1,112 +1,145 @@
 import Ember from 'ember';
 
-var FA_PREFIX = /^fa\-.+/;
+const FA_PREFIX = /^fa\-.+/;
 
-var warn = Ember.Logger.warn;
+const warn = Ember.Logger.warn;
+const { typeOf, isArray } = Ember;
 
 /**
  * Handlebars helper for generating HTML that renders a FontAwesome icon.
  *
- * @param  {String} name    The icon name. Note that the `fa-` prefix is optional.
- *                          For example, you can pass in either `fa-camera` or just `camera`.
- * @param  {Object} options Options passed to helper.
+ * @param  {String} name   The icon name. Note that the `fa-` prefix is optional.
+ *                         For example, you can pass in either `fa-camera` or just `camera`.
+ * @param  {Object} params Options passed to helper.
  * @return {Ember.Handlebars.SafeString} The HTML markup.
  */
-var faIcon = function([name], params) {
-  if (Ember.typeOf(name) !== 'string') {
-    var message = "fa-icon: no icon specified";
+const faIcon = function faIcon(name, {
+  classNames,
+  tagName,
+  ariaHidden,
+  title,
+  spin,
+  pulse,
+  flip,
+  rotate,
+  lg,
+  x,
+  size,
+  fixedWidth,
+  listItem,
+  border,
+  pull,
+  stack,
+  inverse
+} = {}) {
+  if (typeOf(name) !== 'string') {
+    const message = "fa-icon: no icon specified";
     warn(message);
     return Ember.String.htmlSafe(message);
   }
 
-  var classNames = [],
-      html = "";
+  if (classNames === undefined) {
+    classNames = [];
+  }
+
+  if (!isArray(classNames)) {
+    classNames = [ classNames ];
+  }
 
   classNames.push("fa");
+
   if (!name.match(FA_PREFIX)) {
-    name = "fa-" + name;
+    name = `fa-${name}`;
   }
+
   classNames.push(name);
-  if (params.spin) {
+
+  if (spin) {
     classNames.push("fa-spin");
   }
-  if (params.pulse) {
+
+  if (pulse) {
     classNames.push("fa-pulse");
   }
-  if (params.flip) {
-    classNames.push("fa-flip-" + params.flip);
+
+  if (flip) {
+    classNames.push(`fa-flip-${flip}`);
   }
-  if (params.rotate) {
-    classNames.push("fa-rotate-" + params.rotate);
+
+  if (rotate) {
+    classNames.push(`fa-rotate-${rotate}`);
   }
-  if (params.lg) {
-    warn("fa-icon: the 'lg' parameter is deprecated. Use 'size' instead. I.e. {{fa-icon size=\"lg\"}}");
+
+  if (lg) {
+    warn(`fa-icon: the 'lg' parameter is deprecated. Use 'size' instead. I.e. {{fa-icon size="lg"}}`);
     classNames.push("fa-lg");
   }
-  if (params.x) {
-    warn("fa-icon: the 'x' parameter is deprecated. Use 'size' instead. I.e. {{fa-icon size=\"" + params.x + "\"}}");
-    classNames.push("fa-" + params.x + "x");
+
+  if (x) {
+    warn(`fa-icon: the 'x' parameter is deprecated. Use 'size' instead. I.e. {{fa-icon size="${x}"}}`);
+    classNames.push(`fa-${x}x`);
   }
-  if (params.size) {
-    if (Ember.typeOf(params.size) === "string" && params.size.match(/^\d+$/)) {
-      params.size = Number(params.size);
+
+  if (size) {
+    if (typeOf(size) === "string" && size.match(/^\d+$/)) {
+      size = Number(size);
     }
-    if (Ember.typeOf(params.size) === "number") {
-      classNames.push("fa-" + params.size + "x");
+
+    if (typeOf(size) === "number") {
+      classNames.push(`fa-${size}x`);
     } else {
-      classNames.push("fa-" + params.size);
+      classNames.push(`fa-${size}`);
     }
   }
-  if (params.fixedWidth) {
+
+  if (fixedWidth) {
     classNames.push("fa-fw");
   }
-  if (params.listItem) {
+
+  if (listItem) {
     classNames.push("fa-li");
   }
-  if (params.pull) {
-    classNames.push("pull-" + params.pull);
+
+  if (pull) {
+    classNames.push("pull-" + pull);
   }
-  if (params.border) {
+
+  if (border) {
     classNames.push("fa-border");
   }
-  if (params.stack) {
-    if (Ember.typeOf(params.stack) === "string" && params.stack.match(/^\d+$/)) {
-      params.size = Number(params.stack);
+
+  if (stack) {
+    if (typeOf(stack) === "string" && stack.match(/^\d+$/)) {
+      size = Number(stack);
     }
-    if (Ember.typeOf(params.stack) === "number") {
-      classNames.push("fa-stack-" + params.stack + "x");
+
+    if (typeOf(stack) === "number") {
+      classNames.push(`fa-stack-${stack}x`);
     } else {
-      classNames.push("fa-stack-" + params.stack);
+      classNames.push(`fa-stack-${stack}`);
     }
   }
-  if (params.inverse) {
+
+  if (inverse) {
     classNames.push("fa-inverse");
   }
-  if (params.classNames && !Ember.isArray(params.classNames)) {
-    params.classNames = [ params.classNames ];
-  }
-  if (!Ember.isEmpty(params.classNames)) {
-    Array.prototype.push.apply(classNames, params.classNames);
-  }
 
+  const showAriaHidden = ariaHidden === undefined || ariaHidden;
 
-  html += "<";
-  var tagName = params.tagName || 'i';
-  html += tagName;
-  html += " class='" + classNames.join(" ") + "'";
-  if (params.title) {
-    html += " title='" + params.title + "'";
-  }
-  if (params.ariaHidden === undefined || params.ariaHidden) {
-    html += " aria-hidden=\"true\"";
-  }
-  html += "></" + tagName + ">";
-  return Ember.String.htmlSafe(html);
+  tagName = tagName || 'i';
+
+  const htmlClass      = `class="${classNames.join(" ")}"`;
+  const htmlTitle      = title ? `title="${title}"` : "";
+  const htmlAriaHidden = showAriaHidden ? `aria-hidden="true"` : "";
+
+  const html =
+    `<${tagName} ${htmlClass} ${htmlTitle} ${htmlAriaHidden}></${tagName}>`;
+
+  // removes extra whitespaces
+  return html.replace(/\s+/g, " ");
 };
 
-export {
-  faIcon
-};
-
-export { faIcon };
-export default Ember.Helper.helper(faIcon);
+export { faIcon }; // jshint ignore:line
+export default Ember.Helper.helper(function faIconHelper([name], params) {
+  return Ember.String.htmlSafe(faIcon(name, params));
+});
