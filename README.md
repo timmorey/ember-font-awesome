@@ -20,6 +20,26 @@ If you're using older versions of either Ember or Ember CLI, use v0.0.9 instead:
 npm install --save-dev ember-cli-font-awesome@0.0.9
 ```
 
+### Use sass/scss
+
+You can opt-in to the scss version of font-awesome. You can do this by adding
+the following configuration in `ember-cli-build.js`:
+
+```js
+var app = new EmberApp({
+  emberCliFontAwesome: {
+    useScss: true
+  }
+});
+
+```
+
+Then in your `app.scss`:
+
+```scss
+@import "font-awesome/path";
+```
+
 ## Basic usage
 
 In your Handlebars templates:
