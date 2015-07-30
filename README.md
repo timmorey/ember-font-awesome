@@ -37,7 +37,7 @@ var app = new EmberApp({
 Then in your `app.scss`:
 
 ```scss
-@import "font-awesome/path";
+@import "bower_components/font-awesome/scss/font-awesome";
 ```
 
 ## Basic usage
