@@ -2,6 +2,6 @@ module.exports = {
   normalizeEntityName: function() {},
 
   afterInstall: function() {
-    return this.addBowerPackageToProject('font-awesome', '~4.3.0');
+    return this.addBowerPackageToProject('font-awesome', '~4.4.0');
   }
 };
