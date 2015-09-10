@@ -1,4 +1,4 @@
-# ember-cli-font-awesome [![Build Status](https://travis-ci.org/lfridael/ember-cli-font-awesome.svg?branch=master)](https://travis-ci.org/lfridael/ember-cli-font-awesome)
+# ember-cli-font-awesome [![Build Status](https://travis-ci.org/lfridael/ember-cli-font-awesome.svg?branch=master)](https://travis-ci.org/martndemus/ember-cli-font-awesome)
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Font Awesome](http://fortawesome.github.io/Font-Awesome/) icons in Ember applications.
 
