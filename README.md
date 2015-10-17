@@ -12,9 +12,9 @@ $ ember generate ember-cli-font-awesome
 
 ### Compatibility
 
-From v0.1.0 onwards this addon requires Ember v1.13 and Ember CLI v1.13.1.
+From `v0.1.0` onwards this addon requires Ember >= v1.13 and Ember CLI v1.13.X.
 
-If you're using older versions of either Ember or Ember CLI, use v0.0.9 instead:
+If you're using older versions of either Ember or Ember CLI, use `v0.0.9` instead:
 
 ```bash
 npm install --save-dev ember-cli-font-awesome@0.0.9

@@ -140,6 +140,16 @@ const faIcon = function faIcon(name, {
 };
 
 export { faIcon }; // jshint ignore:line
-export default Ember.Helper.helper(function faIconHelper([name], params) {
-  return Ember.String.htmlSafe(faIcon(name, params));
-});
+
+var templateHelper;
+if (Ember.Helper) {
+  templateHelper = Ember.Helper.helper(function faIconHelper([name], params) {
+    return Ember.String.htmlSafe(faIcon(name, params));
+  });
+} else {
+  templateHelper = Ember.HTMLBars.makeBoundHelper(function(name, params) {
+    return Ember.String.htmlSafe(faIcon(name, params));
+  });
+}
+
+export default templateHelper;
