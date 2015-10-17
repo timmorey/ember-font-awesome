@@ -1,6 +1,10 @@
-# ember-cli-font-awesome [![Build Status](https://travis-ci.org/martndemus/ember-cli-font-awesome.svg?branch=master)](https://travis-ci.org/martndemus/ember-cli-font-awesome)
+# ember-cli-font-awesome
+[![npm version](https://badge.fury.io/js/ember-cli-font-awesome.svg)](http://badge.fury.io/js/ember-cli-font-awesome)
+[![Build Status](https://travis-ci.org/martndemus/ember-cli-font-awesome.svg?branch=master)](https://travis-ci.org/martndemus/ember-cli-font-awesome)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-cli-font-awesome.svg)](http://emberobserver.com/addons/ember-cli-font-awesome)
 
 An [ember-cli](http://www.ember-cli.com) addon for using [Font Awesome](http://fortawesome.github.io/Font-Awesome/) icons in Ember applications.
+
 
 ## Install
 
