@@ -124,11 +124,16 @@ options map to their `fa-icon` counterparts.
 ### List icons
 
 ```hbs
-<ul class="fa-ul">
-  <li>
-    {{fa-icon icon="star" listItem=true}} Item
-  </li>
-</ul>
+{{fa-icon icon="star" listItem=true}}
+```
+
+In combination with the `{{fa-list}}` and `{{fa-list-icon}}` components:
+
+```hbs
+{{#fa-list}}
+  <li>{{fa-list-icon icon="star"}}Item 1</li>
+  <li>{{fa-list-icon icon="star"}}Item 2</li>
+{{/fa-list}}
 ```
 
 ### Fixed width icons
