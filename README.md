@@ -182,6 +182,14 @@ To remove the `aria-hidden` attribute:
 <i class="fa fa-star"></i>
 ```
 
+### Actions
+
+You can respond to actions on the icon by passing on action handlers:
+
+```hbs
+{{fa-icon icon="star" click=(action "myClickHandler")}}
+```
+
 ### Tag name
 
 Use `tagName` to control the generated markup:
