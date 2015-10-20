@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { computed } = Ember;
+const {typeOf, computed } = Ember;
 
 export default Ember.Component.extend({
   tagName: 'i',
@@ -44,17 +44,25 @@ export default Ember.Component.extend({
   rotateCssClass: computed('rotate', function() {
     let rotate = this.get('rotate');
     if (rotate) {
-      return rotate.match(/^fa-rotate/) ? rotate : `fa-rotate-${rotate}`;
+      if (typeOf(rotate) === "string") {
+        return rotate.match(/^fa-rotate/) ? rotate : `fa-rotate-${rotate}`;
+      } else {
+        return `fa-rotate-${rotate}`;
+      }
     }
   }),
 
   sizeCssClass: computed('size', function() {
     let size = this.get('size');
     if (size) {
-      if (size.match(/^fa-/)) {
-        return size;
+      if (typeOf(size) === "string") {
+        if (size.match(/^fa-/)) {
+          return size;
+        } else {
+          return size.match(/(?:lg|x)$/) ? `fa-${size}` : `fa-${size}x`;
+        }
       } else {
-        return size.match(/(?:lg|x)$/) ? `fa-${size}` : `fa-${size}x`;
+        return `fa-${size}x`;
       }
     }
   }),
@@ -69,10 +77,14 @@ export default Ember.Component.extend({
   stackCssClass: computed('stack', function() {
     let stack = this.get('stack');
     if (stack) {
-      if (stack.match(/^fa-/)) {
-        return stack;
+      if (typeOf(stack) === "string") {
+        if (stack.match(/^fa-/)) {
+          return stack;
+        } else {
+          return stack.match(/x$/) ? `fa-stack-${stack}` : `fa-stack-${stack}x`;
+        }
       } else {
-        return stack.match(/x$/) ? `fa-stack-${stack}` : `fa-stack-${stack}x`;
+        return `fa-stack-${stack}x`;
       }
     }
   }),
