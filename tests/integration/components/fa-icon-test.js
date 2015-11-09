@@ -79,6 +79,12 @@ test('fa-rotate 270', function(assert) {
   assert.ok($icon.hasClass('fa-rotate-270'));
 });
 
+test('fa-rotate 270 as integer', function(assert) {
+  this.render(hbs`{{fa-icon icon="fa-credit-card" rotate=270}}`);
+  const $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-rotate-270'));
+});
+
 test('fa-rotate no rotation', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
   const $icon = this.$('i');
@@ -91,7 +97,6 @@ test('fa-rotate prefixed with fa-rotate', function(assert) {
   assert.ok($icon.hasClass('fa-rotate-270'));
 });
 
-
 test('size 2x', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" size="2x"}}`);
   const $icon = this.$('i');
@@ -100,6 +105,12 @@ test('size 2x', function(assert) {
 
 test('size 2', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" size="2"}}`);
+  const $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-2x'));
+});
+
+test('size 2 as integer', function(assert) {
+  this.render(hbs`{{fa-icon icon="fa-credit-card" size=2}}`);
   const $icon = this.$('i');
   assert.ok($icon.hasClass('fa-2x'));
 });
@@ -172,6 +183,12 @@ test('fa-stack 2x', function(assert) {
 
 test('fa-stack 2', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" stack="2"}}`);
+  const $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-stack-2x'));
+});
+
+test('fa-stack 2 as integer', function(assert) {
+  this.render(hbs`{{fa-icon icon="fa-credit-card" stack=2}}`);
   const $icon = this.$('i');
   assert.ok($icon.hasClass('fa-stack-2x'));
 });
