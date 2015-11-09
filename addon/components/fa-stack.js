@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import tryMatch from 'ember-cli-font-awesome/utils/try-match';
 
 const { computed } = Ember;
 
@@ -12,10 +13,12 @@ export default Ember.Component.extend({
   sizeCssClass: computed('size', function() {
     let size = this.get('size');
     if (size) {
-      if (size.match(/^fa-/)) {
+      if (tryMatch(size, /^fa-/)) {
         return size;
+      } else if (tryMatch(size, /(?:lg|x)$/)) {
+        return `fa-${size}`;
       } else {
-        return size.match(/(?:lg|x)$/) ? `fa-${size}` : `fa-${size}x`;
+        return `fa-${size}x`;
       }
     }
   }),

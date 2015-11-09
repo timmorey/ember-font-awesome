@@ -24,6 +24,13 @@ test('size 2', function(assert) {
   assert.ok($stack.hasClass('fa-2x'));
 });
 
+test('size as a number', function(assert) {
+  this.set('stack', 2);
+  this.render(hbs`{{fa-stack size=stack}}`);
+  const $stack = this.$('span');
+  assert.ok($stack.hasClass('fa-2x'));
+});
+
 test('size fa-3x', function(assert) {
   this.render(hbs`{{fa-stack size="fa-3x"}}`);
   const $stack = this.$('span');

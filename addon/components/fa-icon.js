@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import tryMatch from 'ember-cli-font-awesome/utils/try-match';
 
-const {typeOf, computed } = Ember;
+const { computed } = Ember;
 
 export default Ember.Component.extend({
   tagName: 'i',
@@ -28,24 +29,24 @@ export default Ember.Component.extend({
   ],
 
   iconCssClass: computed('icon', function() {
-    let icon = this.get('icon');
+    const icon = this.get('icon');
     if (icon) {
-      return icon.match(/^fa-/) ? icon : `fa-${icon}`;
+      return tryMatch(icon, /^fa-/) ? icon : `fa-${icon}`;
     }
   }),
 
   flipCssClass: computed('flip', function() {
-    let flip = this.get('flip');
+    const flip = this.get('flip');
     if (flip) {
-      return flip.match(/^fa-flip/) ? flip : `fa-flip-${flip}`;
+      return tryMatch(flip, /^fa-flip/) ? flip : `fa-flip-${flip}`;
     }
   }),
 
   rotateCssClass: computed('rotate', function() {
-    let rotate = this.get('rotate');
+    const rotate = this.get('rotate');
     if (rotate) {
-      if (typeOf(rotate) === "string") {
-        return rotate.match(/^fa-rotate/) ? rotate : `fa-rotate-${rotate}`;
+      if (tryMatch(rotate, /^fa-rotate/)) {
+        return rotate;
       } else {
         return `fa-rotate-${rotate}`;
       }
@@ -53,14 +54,12 @@ export default Ember.Component.extend({
   }),
 
   sizeCssClass: computed('size', function() {
-    let size = this.get('size');
+    const size = this.get('size');
     if (size) {
-      if (typeOf(size) === "string") {
-        if (size.match(/^fa-/)) {
-          return size;
-        } else {
-          return size.match(/(?:lg|x)$/) ? `fa-${size}` : `fa-${size}x`;
-        }
+      if (tryMatch(size, /^fa-/)) {
+        return size;
+      } else if (tryMatch(size, /(?:lg|x)$/)) {
+        return `fa-${size}`;
       } else {
         return `fa-${size}x`;
       }
@@ -68,21 +67,19 @@ export default Ember.Component.extend({
   }),
 
   pullCssClass: computed('pull', function() {
-    let pull = this.get('pull');
+    const pull = this.get('pull');
     if (pull) {
       return `fa-pull-${pull}`;
     }
   }),
 
   stackCssClass: computed('stack', function() {
-    let stack = this.get('stack');
+    const stack = this.get('stack');
     if (stack) {
-      if (typeOf(stack) === "string") {
-        if (stack.match(/^fa-/)) {
-          return stack;
-        } else {
-          return stack.match(/x$/) ? `fa-stack-${stack}` : `fa-stack-${stack}x`;
-        }
+      if (tryMatch(stack, /^fa-/)) {
+        return stack;
+      } else if (tryMatch(stack, /x$/)) {
+        return `fa-stack-${stack}`;
       } else {
         return `fa-stack-${stack}x`;
       }
