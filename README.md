@@ -57,6 +57,13 @@ Then in your `app.scss`:
 In your Handlebars templates:
 
 ```hbs
+{{fa-icon "camera"}}
+```
+
+__NOTE:__ With Ember versions `1.11.X` and `1.12.X` you must specify the the
+icon as a hash param, as these versions do not support `positionalParam`.
+
+```hbs
 {{fa-icon icon="camera"}}
 ```
 
@@ -68,8 +75,8 @@ This will render:
 If you prefer, you can use the `fa-` prefix in the icon name.
 
 ```hbs
-{{fa-icon icon="fa-camera"}}
-{{fa-icon icon="camera"}}
+{{fa-icon "fa-camera"}}
+{{fa-icon "camera"}}
 ```
 
 [Complete list of Font Awesome icons](http://fortawesome.github.io/Font-Awesome/icons/)
@@ -83,58 +90,58 @@ options map to their `fa-icon` counterparts.
 ### Different icon sizes
 
 ```hbs
-{{fa-icon icon="star" size="lg"}}
-{{fa-icon icon="star" size=2}}
-{{fa-icon icon="star" size=3}}
-{{fa-icon icon="star" size=4}}
-{{fa-icon icon="star" size=5}}
+{{fa-icon "star" size="lg"}}
+{{fa-icon "star" size=2}}
+{{fa-icon "star" size=3}}
+{{fa-icon "star" size=4}}
+{{fa-icon "star" size=5}}
 ```
 
 ### Rotate
 
 ```hbs
-{{fa-icon icon="camera" rotate=90}}
-{{fa-icon icon="camera" rotate=180}}
-{{fa-icon icon="camera" rotate=270}}
+{{fa-icon "camera" rotate=90}}
+{{fa-icon "camera" rotate=180}}
+{{fa-icon "camera" rotate=270}}
 ```
 
 ### Flip
 
 ```hbs
-{{fa-icon icon="bicycle" flip="horizontal"}}
-{{fa-icon icon="car" flip="vertical"}}
+{{fa-icon "bicycle" flip="horizontal"}}
+{{fa-icon "car" flip="vertical"}}
 ```
 
 ### Spin
 
 ```hbs
-{{fa-icon icon="refresh" spin=true}}
+{{fa-icon "refresh" spin=true}}
 ```
 
 ### Pulse
 
 ```hbs
-{{fa-icon icon="spinner" pulse=true}}
+{{fa-icon "spinner" pulse=true}}
 ```
 
 ### Inverse
 
 ```hbs
-{{fa-icon icon="circle" inverse=true}}
+{{fa-icon "circle" inverse=true}}
 ```
 
 ### List icons
 
 ```hbs
-{{fa-icon icon="star" listItem=true}}
+{{fa-icon "star" listItem=true}}
 ```
 
 In combination with the `{{fa-list}}` and `{{fa-list-icon}}` components:
 
 ```hbs
 {{#fa-list}}
-  <li>{{fa-list-icon icon="star"}}Item 1</li>
-  <li>{{fa-list-icon icon="star"}}Item 2</li>
+  <li>{{fa-list-icon "star"}}Item 1</li>
+  <li>{{fa-list-icon "star"}}Item 2</li>
 {{/fa-list}}
 ```
 
@@ -143,10 +150,10 @@ In combination with the `{{fa-list}}` and `{{fa-list-icon}}` components:
 ```hbs
 <div class="list-group">
   <a class="list-group-item" href="#">
-    {{fa-icon icon="home" fixedWidth=true}} Home
+    {{fa-icon "home" fixedWidth=true}} Home
   </a>
   <a class="list-group-item" href="#">
-    {{fa-icon icon="book" fixedWidth=true}} Library
+    {{fa-icon "book" fixedWidth=true}} Library
   </a>
 </div>
 ```
@@ -155,7 +162,7 @@ In combination with the `{{fa-list}}` and `{{fa-list-icon}}` components:
 
 ```hbs
 <p>
-{{fa-icon icon="quote-left" pull="left" border=true}}
+{{fa-icon "quote-left" pull="left" border=true}}
 ...tomorrow we will run faster, stretch out our arms farther...
 And then one fine morning— So we beat on, boats against the
 current, borne back ceaselessly into the past.
@@ -166,8 +173,8 @@ current, borne back ceaselessly into the past.
 
 ```hbs
 {{#fa-stack size="lg"}}
-  {{fa-icon icon="fa-square-o" stack=2}}
-  {{fa-icon icon="fa-twitter" stack=1}}
+  {{fa-icon "fa-square-o" stack=2}}
+  {{fa-icon "fa-twitter" stack=1}}
 {{/fa-stack}}
 ```
 
@@ -177,7 +184,7 @@ current, borne back ceaselessly into the past.
 To better support accessibility (i.e. screen readers), the helper now generates an `aria-hidden` attribute by default:
 
 ```hbs
-{{fa-icon icon="star"}}
+{{fa-icon "star"}}
 {{!-- results in: --}}
 <i class="fa fa-star" aria-hidden="true"></i>
 ```
@@ -185,7 +192,7 @@ To better support accessibility (i.e. screen readers), the helper now generates 
 To remove the `aria-hidden` attribute:
 
 ```hbs
-{{fa-icon icon="star" ariaHidden=false}}
+{{fa-icon "star" ariaHidden=false}}
 {{!-- results in: --}}
 <i class="fa fa-star"></i>
 ```
@@ -195,7 +202,7 @@ To remove the `aria-hidden` attribute:
 You can respond to actions on the icon by passing on action handlers:
 
 ```hbs
-{{fa-icon icon="star" click=(action "myClickHandler")}}
+{{fa-icon "star" click=(action "myClickHandler")}}
 ```
 
 ### Tag name
@@ -203,7 +210,7 @@ You can respond to actions on the icon by passing on action handlers:
 Use `tagName` to control the generated markup:
 
 ```hbs
-{{fa-icon icon="star" tagName="span"}}
+{{fa-icon "star" tagName="span"}}
 {{!-- results in: --}}
 <span class="fa fa-star"></span>
 ```
@@ -211,7 +218,7 @@ Use `tagName` to control the generated markup:
 ### Custom class names
 
 ```hbs
-{{fa-icon icon="bicycle" class="my-custom-class"}}
+{{fa-icon "bicycle" class="my-custom-class"}}
 {{!-- results in: --}}
 <i class="fa fa-bicycle my-custom-class"></i>
 ```
@@ -219,7 +226,7 @@ Use `tagName` to control the generated markup:
 ### Title attribute
 
 ```hbs
-{{fa-icon icon="edit" title="Edit the item"}}
+{{fa-icon "edit" title="Edit the item"}}
 {{!-- results in: --}}
 <i class="fa fa-edit" title="Edit the item"></i>
 ```

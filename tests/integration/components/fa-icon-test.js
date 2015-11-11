@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -18,6 +19,14 @@ test('it renders an icon with given icon class', function(assert) {
   const $icon = this.$('i');
   assert.ok($icon.hasClass('fa-credit-card'));
 });
+
+if (!Ember.VERSION.match(/^(1.11|1.12)/)) {
+  test('it renders an icon with icon class as positional param', function(assert) {
+    this.render(hbs`{{fa-icon "credit-card"}}`);
+    const $icon = this.$('i');
+    assert.ok($icon.hasClass('fa-credit-card'));
+  });
+}
 
 test('it does not add the class fa-undefined when icon is null/undefined', function(assert) {
   this.render(hbs`{{fa-icon}}`);

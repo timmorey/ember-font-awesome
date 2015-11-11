@@ -3,7 +3,7 @@ import tryMatch from 'ember-cli-font-awesome/utils/try-match';
 
 const { computed } = Ember;
 
-export default Ember.Component.extend({
+const FaIconComponent = Ember.Component.extend({
   tagName: 'i',
 
   classNames: ['fa'],
@@ -28,8 +28,9 @@ export default Ember.Component.extend({
     'title'
   ],
 
-  iconCssClass: computed('icon', function() {
-    const icon = this.get('icon');
+  iconCssClass: computed('icon', 'params.[]', function() {
+    const params = this.get('params');
+    const icon = this.get('icon') || (params && params.length && params[0]);
     if (icon) {
       return tryMatch(icon, /^fa-/) ? icon : `fa-${icon}`;
     }
@@ -91,3 +92,9 @@ export default Ember.Component.extend({
     return ariaHidden !== false ? true : undefined;
   })
 });
+
+FaIconComponent.reopenClass({
+  positionalParams: 'params'
+});
+
+export default FaIconComponent;
