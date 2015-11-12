@@ -16,10 +16,7 @@
     "node": ">= 0.12.0"
   },
   "author": "Marten Schilstra <mail@martenschilstra.nl",
-  "license": {
-    "type": "Public Domain",
-    "url": "https://raw.githubusercontent.com/martndemus/ember-cli-font-awesome/master/UNLICENSE"
-  },
+  "license": "Unlicense",
   "devDependencies": {
     "broccoli-asset-rev": "^2.3.0",
     "ember-cli": "1.13.10",
