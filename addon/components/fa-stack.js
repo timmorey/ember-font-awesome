@@ -21,5 +21,5 @@ export default Ember.Component.extend({
         return `fa-${size}x`;
       }
     }
-  }),
+  })
 });
