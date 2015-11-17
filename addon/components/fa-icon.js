@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import tryMatch from 'ember-cli-font-awesome/utils/try-match';
-
-const { computed } = Ember;
+import computed from 'ember-computed-decorators';
+import optional from 'ember-cli-font-awesome/utils/optional-decorator';
 
 const FaIconComponent = Ember.Component.extend({
   tagName: 'i',
@@ -28,69 +28,64 @@ const FaIconComponent = Ember.Component.extend({
     'title'
   ],
 
-  iconCssClass: computed('icon', 'params.[]', function() {
-    const params = this.get('params');
-    const icon = this.get('icon') || (params && params.length && params[0]);
+  @computed('icon', 'params.[]')
+  iconCssClass(icon, params) {
+    icon = icon || params[0];
     if (icon) {
       return tryMatch(icon, /^fa-/) ? icon : `fa-${icon}`;
     }
-  }),
+  },
 
-  flipCssClass: computed('flip', function() {
-    const flip = this.get('flip');
-    if (flip) {
-      return tryMatch(flip, /^fa-flip/) ? flip : `fa-flip-${flip}`;
+  @computed('flip')
+  @optional
+  flipCssClass(flip) {
+    return tryMatch(flip, /^fa-flip/) ? flip : `fa-flip-${flip}`;
+  },
+
+  @computed('rotate')
+  @optional
+  rotateCssClass(rotate) {
+    if (tryMatch(rotate, /^fa-rotate/)) {
+      return rotate;
+    } else {
+      return `fa-rotate-${rotate}`;
     }
-  }),
+  },
 
-  rotateCssClass: computed('rotate', function() {
-    const rotate = this.get('rotate');
-    if (rotate) {
-      if (tryMatch(rotate, /^fa-rotate/)) {
-        return rotate;
-      } else {
-        return `fa-rotate-${rotate}`;
-      }
+  @computed('size')
+  @optional
+  sizeCssClass(size) {
+    if (tryMatch(size, /^fa-/)) {
+      return size;
+    } else if (tryMatch(size, /(?:lg|x)$/)) {
+      return `fa-${size}`;
+    } else {
+      return `fa-${size}x`;
     }
-  }),
+  },
 
-  sizeCssClass: computed('size', function() {
-    const size = this.get('size');
-    if (size) {
-      if (tryMatch(size, /^fa-/)) {
-        return size;
-      } else if (tryMatch(size, /(?:lg|x)$/)) {
-        return `fa-${size}`;
-      } else {
-        return `fa-${size}x`;
-      }
+  @computed('pull')
+  @optional
+  pullCssClass(pull) {
+    return `fa-pull-${pull}`;
+  },
+
+  @computed('stack')
+  @optional
+  stackCssClass(stack) {
+    if (tryMatch(stack, /^fa-/)) {
+      return stack;
+    } else if (tryMatch(stack, /x$/)) {
+      return `fa-stack-${stack}`;
+    } else {
+      return `fa-stack-${stack}x`;
     }
-  }),
+  },
 
-  pullCssClass: computed('pull', function() {
-    const pull = this.get('pull');
-    if (pull) {
-      return `fa-pull-${pull}`;
-    }
-  }),
-
-  stackCssClass: computed('stack', function() {
-    const stack = this.get('stack');
-    if (stack) {
-      if (tryMatch(stack, /^fa-/)) {
-        return stack;
-      } else if (tryMatch(stack, /x$/)) {
-        return `fa-stack-${stack}`;
-      } else {
-        return `fa-stack-${stack}x`;
-      }
-    }
-  }),
-
-  ariaHiddenAttribute: computed('ariaHidden', function() {
-    const ariaHidden = this.get('ariaHidden');
+  @computed('ariaHidden')
+  ariaHiddenAttribute(ariaHidden) {
     return ariaHidden !== false ? true : undefined;
-  })
+  }
 });
 
 FaIconComponent.reopenClass({

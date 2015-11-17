@@ -7,6 +7,16 @@ var Funnel = require('broccoli-funnel');
 module.exports = {
   name: 'ember-cli-font-awesome',
 
+  init: function(app) {
+    this.options = this.options || [];
+    this.options.babel = this.options.babel || {};
+    this.options.babel.optional = this.options.babel.optional || [];
+
+    if (this.options.babel.optional.indexOf('es7.decorators') === -1) {
+      this.options.babel.optional.push('es7.decorators');
+    }
+  },
+
   included: function(app, parentAddon) {
     this._super.included(app);
 
@@ -29,6 +39,7 @@ module.exports = {
       target.import(target.bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
       target.import(target.bowerDirectory + "/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
     }
+
   },
 
   treeForStyles: function() {
