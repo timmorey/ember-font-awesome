@@ -8,7 +8,7 @@ module.exports = {
   name: 'ember-cli-font-awesome',
 
   init: function(app) {
-    this.options = this.options || [];
+    this.options = this.options || {};
     this.options.babel = this.options.babel || {};
     this.options.babel.optional = this.options.babel.optional || [];
 
