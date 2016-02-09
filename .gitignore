@@ -15,9 +15,3 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
-
-# OS X
-.DS_Store
-
-# WebStorm / IntelliJ IDEA
-.idea
