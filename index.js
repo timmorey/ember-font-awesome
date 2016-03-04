@@ -33,8 +33,16 @@ module.exports = {
     this._super.included.call(this, app);
 
 
+    // Per the ember-cli documentation
+    // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
     var target = (parentAddon || app);
     var options = target.options.emberCliFontAwesome || {};
+
+
+    var faPath = path.join(target.bowerDirectory, 'font-awesome');
+    var cssPath = path.join(faPath, 'css');
+    var fontsPath = path.join(faPath, 'fonts');
+
 
     if (!('includeFontAwesomeAssets' in options)) {
       options.includeFontAwesomeAssets = true;
@@ -42,15 +50,15 @@ module.exports = {
 
     if (options.includeFontAwesomeAssets) {
       if (!options.useScss) {
-        target.import(target.bowerDirectory + "/font-awesome/css/font-awesome.css");
+        target.import(path.join(cssPath, 'font-awesome.css'));
       }
 
-      target.import(target.bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.eot", { destDir: "fonts" });
-      target.import(target.bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.svg", { destDir: "fonts" });
-      target.import(target.bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.ttf", { destDir: "fonts" });
-      target.import(target.bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.woff", { destDir: "fonts" });
-      target.import(target.bowerDirectory + "/font-awesome/fonts/fontawesome-webfont.woff2", { destDir: "fonts" });
-      target.import(target.bowerDirectory + "/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.eot'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.svg'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.ttf'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.woff'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.woff2'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'FontAwesome.otf'), { destDir: 'fonts' });
     }
 
   }
