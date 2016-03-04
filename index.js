@@ -20,11 +20,18 @@ module.exports = {
   },
 
   included: function(app, parentAddon) {
-     // see: https://github.com/ember-cli/ember-cli/issues/3718
+
+    // Quick fix for add-on nesting
+    // https://github.com/ember-cli/ember-cli/issues/3718
+    // https://github.com/aexmachina/ember-cli-sass/blob/v5.3.0/index.js#L73-L75
     if (typeof app.import !== 'function' && app.app) {
       this.app = app = app.app;
     }
-    this._super.included(app);
+
+
+    // https://github.com/ember-cli/ember-cli/issues/3718#issuecomment-88122543
+    this._super.included.call(this, app);
+
 
     var target = (parentAddon || app);
     var options = target.options.emberCliFontAwesome || {};
