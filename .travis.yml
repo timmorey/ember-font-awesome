@@ -22,6 +22,7 @@ env:
   - EMBER_TRY_SCENARIO=ember-2.1.X
   - EMBER_TRY_SCENARIO=ember-2.2.X
   - EMBER_TRY_SCENARIO=ember-2.3.X
+  - EMBER_TRY_SCENARIO=ember-2.4.X
 
 before_install:
   - "export DISPLAY=:99.0"
