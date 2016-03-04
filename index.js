@@ -1,6 +1,7 @@
 /* jshint node: true */
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 
 module.exports = {
@@ -42,6 +43,15 @@ module.exports = {
     var faPath = path.join(target.bowerDirectory, 'font-awesome');
     var cssPath = path.join(faPath, 'css');
     var fontsPath = path.join(faPath, 'fonts');
+
+
+    // Make sure font-awesome is available
+    if (!fs.existsSync(faPath)) {
+      throw new Error(
+        this.name + ': font-awesome is not available from bower (' + faPath + '), ' +
+        'install it into your project by running `bower install font-awesome --save`'
+      );
+    }
 
 
     if (!('includeFontAwesomeAssets' in options)) {
