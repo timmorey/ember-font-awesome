@@ -2,7 +2,6 @@
 'use strict';
 
 var path = require('path');
-var Funnel = require('broccoli-funnel');
 
 module.exports = {
   name: 'ember-cli-font-awesome',
@@ -44,15 +43,6 @@ module.exports = {
       target.import(target.bowerDirectory + "/font-awesome/fonts/FontAwesome.otf", { destDir: "fonts" });
     }
 
-  },
-
-  treeForStyles: function() {
-    var fontAwesomePath = path.join(this.app.bowerDirectory, 'font-awesome');
-    var fontAwesomeTree = new Funnel(this.treeGenerator(fontAwesomePath), {
-      srcDir: '/scss',
-      destDir: '/app/styles/font-awesome'
-    });
-
-    return fontAwesomeTree;
   }
+
 };

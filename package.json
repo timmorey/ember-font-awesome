@@ -42,9 +42,7 @@
     "ember-addon"
   ],
   "dependencies": {
-    "broccoli-funnel": "^1.0.1",
     "ember-cli-babel": "^5.1.5",
-    "ember-cli-sass": "^5.0.1",
     "ember-computed-decorators": "0.2.2"
   },
   "ember-addon": {
