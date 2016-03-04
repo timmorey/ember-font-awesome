@@ -33,20 +33,22 @@ and requires Ember CLI `>= 1.13.X`
 If you need compatibility with Ember `< 1.11.X` then you should try version
 `0.0.9`
 
-### Customize with sass/scss
+### Customize with Sass/Scss or Less
 
-If you are using the ember-cli-sass addon, you can opt-in to the Scss version
-of font-awesome by adding the following configuration in `ember-cli-build.js`:
+If you are using the ember-cli-sass or ember-cli-less addon, you can opt-in to
+the Scss or Less version of font-awesome by adding the following configuration
+in `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
   emberCliFontAwesome: {
-    useScss: true
+    useScss: true, // for ember-cli-sass
+    useLess: true  // for ember-cli-less
   }
 });
 ```
 
-Then in your `app.scss`:
+Then in your `app.scss` or `app.less`:
 
 ```scss
 @import "font-awesome";

@@ -37,12 +37,13 @@ module.exports = {
     // Per the ember-cli documentation
     // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
     var target = (parentAddon || app);
-    target.options = target.options || {}; // Ensures options exists for Scss below
+    target.options = target.options || {}; // Ensures options exists for Scss/Less below
     var options = target.options.emberCliFontAwesome || {};
 
 
     var faPath = path.join(target.bowerDirectory, 'font-awesome');
     var scssPath = path.join(faPath, 'scss');
+    var lessPath = path.join(faPath, 'less');
     var cssPath = path.join(faPath, 'css');
     var fontsPath = path.join(faPath, 'fonts');
 
@@ -54,6 +55,17 @@ module.exports = {
       target.options.sassOptions.includePaths = target.options.sassOptions.includePaths || [];
       if (target.options.sassOptions.includePaths.indexOf(scssPath) === -1) {
         target.options.sassOptions.includePaths.push(scssPath);
+      }
+    }
+
+
+    // Ensure the font-awesome path is added to the ember-cli-less addon options
+    // (Taking a cue from the Babel options above)
+    if (options.useLess) {
+      target.options.lessOptions = target.options.lessOptions || {};
+      target.options.lessOptions.paths = target.options.lessOptions.paths || [];
+      if (target.options.lessOptions.paths.indexOf(lessPath) === -1) {
+        target.options.lessOptions.paths.push(lessPath);
       }
     }
 
@@ -73,8 +85,8 @@ module.exports = {
     }
 
 
-    // Import the css when Sass is NOT used
-    if (!options.useScss) {
+    // Import the css when Sass and Less are NOT used
+    if (!options.useScss && !options.useLess) {
       target.import({
         development: path.join(cssPath, 'font-awesome.css'),
         production: path.join(cssPath, 'font-awesome.min.css')
