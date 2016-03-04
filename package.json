@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-font-awesome",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "An ember-cli addon for using Font Awesome icons in Ember applications.",
   "repository": "https://github.com/martndemus/ember-cli-font-awesome",
   "directories": {
