@@ -54,22 +54,23 @@ module.exports = {
     }
 
 
-    if (!('includeFontAwesomeAssets' in options)) {
-      options.includeFontAwesomeAssets = true;
+    // Early out if no assets should be imported
+    if ('includeFontAwesomeAssets' in options && !options.includeFontAwesomeAssets) {
+      return;
     }
 
-    if (options.includeFontAwesomeAssets) {
-      if (!options.useScss) {
-        target.import(path.join(cssPath, 'font-awesome.css'));
-      }
 
-      target.import(path.join(fontsPath, 'fontawesome-webfont.eot'), { destDir: 'fonts' });
-      target.import(path.join(fontsPath, 'fontawesome-webfont.svg'), { destDir: 'fonts' });
-      target.import(path.join(fontsPath, 'fontawesome-webfont.ttf'), { destDir: 'fonts' });
-      target.import(path.join(fontsPath, 'fontawesome-webfont.woff'), { destDir: 'fonts' });
-      target.import(path.join(fontsPath, 'fontawesome-webfont.woff2'), { destDir: 'fonts' });
-      target.import(path.join(fontsPath, 'FontAwesome.otf'), { destDir: 'fonts' });
+    if (!options.useScss) {
+      target.import(path.join(cssPath, 'font-awesome.css'));
     }
+
+
+    target.import(path.join(fontsPath, 'fontawesome-webfont.eot'), { destDir: 'fonts' });
+    target.import(path.join(fontsPath, 'fontawesome-webfont.svg'), { destDir: 'fonts' });
+    target.import(path.join(fontsPath, 'fontawesome-webfont.ttf'), { destDir: 'fonts' });
+    target.import(path.join(fontsPath, 'fontawesome-webfont.woff'), { destDir: 'fonts' });
+    target.import(path.join(fontsPath, 'fontawesome-webfont.woff2'), { destDir: 'fonts' });
+    target.import(path.join(fontsPath, 'FontAwesome.otf'), { destDir: 'fonts' });
 
   }
 

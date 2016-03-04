@@ -52,6 +52,19 @@ Then in your `app.scss`:
 @import "bower_components/font-awesome/scss/font-awesome";
 ```
 
+### Excluding assets
+
+You can configure the addon to _not_ import any assets (CSS or font files) by adding
+the following configuration in `ember-cli-build.js`:
+
+```js
+var app = new EmberApp({
+  emberCliFontAwesome: {
+    includeFontAwesomeAssets: false
+  }
+});
+```
+
 ## Basic usage
 
 In your Handlebars templates:
