@@ -69,12 +69,15 @@ module.exports = {
     }
 
 
-    target.import(path.join(fontsPath, 'fontawesome-webfont.eot'), { destDir: 'fonts' });
-    target.import(path.join(fontsPath, 'fontawesome-webfont.svg'), { destDir: 'fonts' });
-    target.import(path.join(fontsPath, 'fontawesome-webfont.ttf'), { destDir: 'fonts' });
-    target.import(path.join(fontsPath, 'fontawesome-webfont.woff'), { destDir: 'fonts' });
-    target.import(path.join(fontsPath, 'fontawesome-webfont.woff2'), { destDir: 'fonts' });
-    target.import(path.join(fontsPath, 'FontAwesome.otf'), { destDir: 'fonts' });
+    // Import the fonts when option not defined or enabled
+    if (!('includeFontFiles' in options) || options.includeFontFiles) {
+      target.import(path.join(fontsPath, 'fontawesome-webfont.eot'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.svg'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.ttf'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.woff'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'fontawesome-webfont.woff2'), { destDir: 'fonts' });
+      target.import(path.join(fontsPath, 'FontAwesome.otf'), { destDir: 'fonts' });
+    }
 
   }
 

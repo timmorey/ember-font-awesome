@@ -65,6 +65,17 @@ var app = new EmberApp({
 });
 ```
 
+In addition, you can configure the addon to _just_ exclude the font file assets by adding
+the following configuration in `ember-cli-build.js`:
+
+```js
+var app = new EmberApp({
+  emberCliFontAwesome: {
+    includeFontFiles: false
+  }
+});
+```
+
 ## Basic usage
 
 In your Handlebars templates:
