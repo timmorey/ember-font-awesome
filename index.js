@@ -60,8 +60,12 @@ module.exports = {
     }
 
 
+    // Import the css when Sass is NOT used
     if (!options.useScss) {
-      target.import(path.join(cssPath, 'font-awesome.css'));
+      target.import({
+        development: path.join(cssPath, 'font-awesome.css'),
+        production: path.join(cssPath, 'font-awesome.min.css')
+      });
     }
 
 
