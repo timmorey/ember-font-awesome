@@ -35,8 +35,8 @@ If you need compatibility with Ember `< 1.11.X` then you should try version
 
 ### Customize with sass/scss
 
-You can opt-in to the scss version of font-awesome. You can do this by adding
-the following configuration in `ember-cli-build.js`:
+If you are using the ember-cli-sass addon, you can opt-in to the Scss version
+of font-awesome by adding the following configuration in `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
@@ -49,7 +49,7 @@ var app = new EmberApp({
 Then in your `app.scss`:
 
 ```scss
-@import "bower_components/font-awesome/scss/font-awesome";
+@import "font-awesome";
 ```
 
 ### Excluding assets

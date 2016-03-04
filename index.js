@@ -37,12 +37,25 @@ module.exports = {
     // Per the ember-cli documentation
     // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
     var target = (parentAddon || app);
+    target.options = target.options || {}; // Ensures options exists for Scss below
     var options = target.options.emberCliFontAwesome || {};
 
 
     var faPath = path.join(target.bowerDirectory, 'font-awesome');
+    var scssPath = path.join(faPath, 'scss');
     var cssPath = path.join(faPath, 'css');
     var fontsPath = path.join(faPath, 'fonts');
+
+
+    // Ensure the font-awesome path is added to the ember-cli-sass addon options
+    // (Taking a cue from the Babel options above)
+    if (options.useScss) {
+      target.options.sassOptions = target.options.sassOptions || {};
+      target.options.sassOptions.includePaths = target.options.sassOptions.includePaths || [];
+      if (target.options.sassOptions.includePaths.indexOf(scssPath) === -1) {
+        target.options.sassOptions.includePaths.push(scssPath);
+      }
+    }
 
 
     // Make sure font-awesome is available
