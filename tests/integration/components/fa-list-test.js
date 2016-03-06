@@ -8,7 +8,7 @@ moduleForComponent('fa-list', 'Integration | Component | {{fa-list}}', {
 test('it is an ul tag with fa-ul class', function(assert) {
   this.render(hbs`{{fa-list}}`);
 
-  const $list = this.$('ul');
+  let $list = this.$('ul');
   assert.equal($list.length, 1);
   assert.ok($list.hasClass('fa-ul'));
 });
@@ -21,6 +21,6 @@ test('it yields to a block', function(assert) {
     {{/fa-list}}
   `);
 
-  const $icons = this.$('i');
+  let $icons = this.$('i');
   assert.equal($icons.length, 2);
 });
