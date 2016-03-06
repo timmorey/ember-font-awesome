@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "4.2"
+  - "stable"
 
 sudo: false
 
@@ -17,10 +17,6 @@ cache:
     - node_modules
 
 env:
-  - EMBER_TRY_SCENARIO=ember-1.13.X
-  - EMBER_TRY_SCENARIO=ember-2.0.X
-  - EMBER_TRY_SCENARIO=ember-2.1.X
-  - EMBER_TRY_SCENARIO=ember-2.2.X
   - EMBER_TRY_SCENARIO=ember-2.3.X
   - EMBER_TRY_SCENARIO=ember-2.4.X
 
