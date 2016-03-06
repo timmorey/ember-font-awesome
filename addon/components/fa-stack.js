@@ -1,13 +1,14 @@
 import Ember from 'ember';
+import layout from '../templates/components/fa-stack';
 import tryMatch from 'ember-cli-font-awesome/utils/try-match';
 import computed from 'ember-computed-decorators';
 import optional from 'ember-cli-font-awesome/utils/optional-decorator';
 
 export default Ember.Component.extend({
+  layout,
+
   tagName: 'span',
-
   classNames: 'fa-stack',
-
   classNameBindings: ['sizeCssClass'],
 
   @computed('size')
