@@ -174,12 +174,11 @@ current, borne back ceaselessly into the past.
 #### Stacked icons
 
 ```hbs
-{{#fa-stack size="lg"}}
-  {{fa-icon "fa-square-o" stack=2}}
-  {{fa-icon "fa-twitter" stack=1}}
+{{#fa-stack size="lg" as |s|}}
+  {{s.fa-icon-2x "fa-square-o"}}
+  {{s.fa-icon-1x "fa-twitter"}}
 {{/fa-stack}}
 ```
-
 
 #### aria-hidden attribute
 

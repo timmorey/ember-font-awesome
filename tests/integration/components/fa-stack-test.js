@@ -45,9 +45,9 @@ test('size lg', function(assert) {
 
 test('it yields to a block', function(assert) {
   this.render(hbs`
-    {{#fa-stack}}
-      {{fa-icon icon="fa-square-o" stack="2x"}}
-      {{fa-icon icon="fa-twitter" stack="1x"}}
+    {{#fa-stack as |s|}}
+      {{s.fa-icon-2x icon="fa-square-o"}}
+      {{s.fa-icon-1x icon="fa-twitter"}}
     {{/fa-stack}}
   `);
 
