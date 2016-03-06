@@ -138,12 +138,12 @@ options map to their `fa-icon` counterparts.
 {{fa-icon "star" listItem=true}}
 ```
 
-In combination with the `{{fa-list}}` and `{{fa-list-icon}}` components:
+The `{{fa-list}}` component yields a `{{fa-icon}}` with `listItem` set to true:
 
 ```hbs
-{{#fa-list}}
-  <li>{{fa-list-icon "star"}}Item 1</li>
-  <li>{{fa-list-icon "star"}}Item 2</li>
+{{#fa-list as |l|}}
+  <li>{{l.fa-icon "star"}}Item 1</li>
+  <li>{{l.fa-icon "star"}}Item 2</li>
 {{/fa-list}}
 ```
 
