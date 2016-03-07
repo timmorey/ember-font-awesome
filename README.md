@@ -226,7 +226,7 @@ in `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
-  emberCliFontAwesome: {
+  'ember-font-awesome': {
     useScss: true, // for ember-cli-sass
     useLess: true  // for ember-cli-less
   }
@@ -246,7 +246,7 @@ the following configuration in `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
-  emberCliFontAwesome: {
+  'ember-font-awesome': {
     includeFontAwesomeAssets: false
   }
 });
@@ -257,7 +257,7 @@ the following configuration in `ember-cli-build.js`:
 
 ```js
 var app = new EmberApp({
-  emberCliFontAwesome: {
+  'ember-font-awesome': {
     includeFontFiles: false
   }
 });
