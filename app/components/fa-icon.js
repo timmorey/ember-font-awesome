@@ -1,1 +1,1 @@
-export { default } from 'ember-cli-font-awesome/components/fa-icon';
+export { default } from 'ember-font-awesome/components/fa-icon';

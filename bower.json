@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-font-awesome",
+  "name": "ember-font-awesome",
   "dependencies": {
     "ember": "components/ember#canary",
     "ember-cli-shims": "0.1.0",

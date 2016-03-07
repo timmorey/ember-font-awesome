@@ -1,7 +1,9 @@
 import Ember from 'ember';
-import tryMatch from 'ember-cli-font-awesome/utils/try-match';
+
 import computed from 'ember-computed-decorators';
-import optional from 'ember-cli-font-awesome/utils/optional-decorator';
+
+import tryMatch from '../utils/try-match';
+import optional from '../utils/optional-decorator';
 
 const FaIconComponent = Ember.Component.extend({
   tagName: 'i',

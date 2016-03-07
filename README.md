@@ -1,14 +1,14 @@
-# ember-cli-font-awesome
-[![npm version](https://badge.fury.io/js/ember-cli-font-awesome.svg)](http://badge.fury.io/js/ember-cli-font-awesome)
-[![Build Status](https://travis-ci.org/martndemus/ember-cli-font-awesome.svg?branch=master)](https://travis-ci.org/martndemus/ember-cli-font-awesome)
-[![Ember Observer Score](http://emberobserver.com/badges/ember-cli-font-awesome.svg)](http://emberobserver.com/addons/ember-cli-font-awesome)
+# ember-font-awesome
+[![npm version](https://badge.fury.io/js/ember-font-awesome.svg)](http://badge.fury.io/js/ember-font-awesome)
+[![Build Status](https://travis-ci.org/martndemus/ember-font-awesome.svg?branch=master)](https://travis-ci.org/martndemus/ember-font-awesome)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-font-awesome.svg)](http://emberobserver.com/addons/ember-font-awesome)
 
 An [ember-cli](http://www.ember-cli.com) addon for using
 [Font Awesome](http://fortawesome.github.io/Font-Awesome/) icons in Ember
 applications.
 
 __WARNING__: _Please verify that you are reading the README corresponding with
-the version of `ember-cli-font-awesome` you are using._
+the version of `ember-font-awesome` you are using._
 
 ## Table of Contents
 
@@ -20,28 +20,27 @@ the version of `ember-cli-font-awesome` you are using._
 
 ### Ember Version Compatibility
 
-Please consult the table to check which version of ember-cli-font-awesome you
+Please consult the table to check which version of `ember-font-awesome` you
 should use:
 
-Addon version         | Ember version
-----------------------|--------------
-`>= 2.0.0`, `< 3.0.0` | `>= 2.3.0`
-`>= 1.0.0`, `< 2.0.0` | `>= 1.11.0`
-`>= 0.1.0`, `< 1.0.0` | `>= 1.13.0`
-`0.0.9`               | `< 1.11.0`
-
+Addon version         | Ember version | Addon name
+----------------------|---------------|-----------------------
+`>= 2.0.0`, `< 3.0.0` | `>= 2.3.0`    | `ember-font-awesome`
+`>= 1.0.0`, `< 2.0.0` | `>= 1.11.0`   | `ember-cli-font-awesome`
+`>= 0.1.0`, `< 1.0.0` | `>= 1.13.0`   | `ember-cli-font-awesome`
+`0.0.9`               | `< 1.11.0`    | `ember-cli-font-awesome`
 
 ### Installing the Add-on
 
 In your application's directory:
 ```bash
-$ ember install ember-cli-font-awesome
+$ ember install ember-font-awesome
 ```
 
 If you have manually installed or updated the addon via NPM then you should also
 run:
 ```bash
-$ ember generate ember-cli-font-awesome
+$ ember generate ember-font-awesome
 ```
 
 ### Using the Add-on

@@ -5,7 +5,7 @@ var fs = require('fs');
 var path = require('path');
 
 module.exports = {
-  name: 'ember-cli-font-awesome',
+  name: 'ember-font-awesome',
 
   init: function(app) {
     // Enable ES7 decorators via Babel
@@ -33,7 +33,7 @@ module.exports = {
     // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
     var target = (parentAddon || app);
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
-    var options = target.options.emberCliFontAwesome || {};
+    var options = target.options['ember-font-awesome'] || {};
 
     var faPath = path.join(target.bowerDirectory, 'font-awesome');
     var scssPath = path.join(faPath, 'scss');
