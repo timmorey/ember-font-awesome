@@ -5,49 +5,48 @@ moduleForComponent('fa-stack', 'Integration | Component | {{fa-stack}}', {
   integration: true
 });
 
-test('it is an span tag with a fa-stack class', function(assert) {
+test("A <span> tag with the 'fa-stack' class", function(assert) {
   this.render(hbs`{{fa-stack}}`);
+
   let $stack = this.$('span');
-  assert.equal($stack.length, 1);
-  assert.ok($stack.hasClass('fa-stack'));
+  assert.equal($stack.length, 1, 'A <span> element is rendered');
+  assert.ok($stack.hasClass('fa-stack'), "The <span> element should have the 'fa-stack' class");
 });
 
-test('size 2x', function(assert) {
-  this.render(hbs`{{fa-stack size="2x"}}`);
-  let $stack = this.$('span');
-  assert.ok($stack.hasClass('fa-2x'));
-});
-
-test('size 2', function(assert) {
-  this.render(hbs`{{fa-stack size="2"}}`);
-  let $stack = this.$('span');
-  assert.ok($stack.hasClass('fa-2x'));
-});
-
-test('size as a number', function(assert) {
-  this.set('stack', 2);
-  this.render(hbs`{{fa-stack size=stack}}`);
-  let $stack = this.$('span');
-  assert.ok($stack.hasClass('fa-2x'));
-});
-
-test('size fa-3x', function(assert) {
-  this.render(hbs`{{fa-stack size="fa-3x"}}`);
-  let $stack = this.$('span');
-  assert.ok($stack.hasClass('fa-3x'));
-});
-
-test('size lg', function(assert) {
+test(`I can set the size property to 'lg'`, function(assert) {
   this.render(hbs`{{fa-stack size="lg"}}`);
   let $stack = this.$('span');
-  assert.ok($stack.hasClass('fa-lg'));
+  assert.ok($stack.hasClass('fa-lg'), "The <span> element should have the 'fa-lg' class");
 });
 
-test('it yields to a block', function(assert) {
+[2, 3, 4, 5].forEach((size) => {
+  test(`I can set the size property as a number - size=${size}`, function(assert) {
+    this.set('size', size);
+    this.render(hbs`{{fa-stack size=size}}`);
+    let $stack = this.$('span');
+    assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
+  });
+
+  test(`I can set the size property as a string - size="${size}"`, function(assert) {
+    this.set('size', `${size}`);
+    this.render(hbs`{{fa-stack size=size}}`);
+    let $stack = this.$('span');
+    assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
+  });
+
+  test(`I can set this size property as a string - size="${size}x"`, function(assert) {
+    this.set('size', `${size}x`);
+    this.render(hbs`{{fa-stack size=size}}`);
+    let $stack = this.$('span');
+    assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
+  });
+});
+
+test('A block with stack contextual components is yielded', function(assert) {
   this.render(hbs`
     {{#fa-stack as |s|}}
-      {{s.fa-icon-2x icon="fa-square-o"}}
-      {{s.fa-icon-1x icon="fa-twitter"}}
+      {{s.stack-2x icon="fa-square-o"}}
+      {{s.stack-1x icon="fa-twitter"}}
     {{/fa-stack}}
   `);
 
