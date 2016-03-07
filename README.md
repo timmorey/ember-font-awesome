@@ -113,7 +113,7 @@ current, borne back ceaselessly into the past.
 
 ```hbs
 {{fa-icon "spinner" spin=true}}
-{{fa-icon "circle-o-notch spin=true}}
+{{fa-icon "circle-o-notch" spin=true}}
 {{fa-icon "refresh" spin=true}}
 {{fa-icon "cog" spin=true}}
 {{fa-icon "spinner" pulse=true}}
