@@ -10,29 +10,28 @@ applications.
 __WARNING__: _Please verify that you are reading the README corresponding with
 the version of `ember-cli-font-awesome` you are using._
 
-## Using the add-on
+## Table of Contents
 
-* [Installing the add-on](#installing-the-add-on)
-* [Using the `fa` components](#using-the-fa-components)
-  + [Different icon sizes](#different-icon-sizes)
-  + [Rotate](#rotate)
-  + [Flip](#flip)
-  + [Spin](#spin)
-  + [Pulse](#pulse)
-  + [Inverse](#inverse)
-  + [List icons](#list-icons)
-  + [Fixed width icons](#fixed-width-icons)
-  + [Bordered & pulled icons](#bordered--pulled-icons)
-  + [`aria-hidden` attribute](#aria-hidden-attribute)
-  + [Actions](#actions)
-  + [Tag name](#tag-name)
-  + [Custom class names](#custom-class-names)
-  + [Title attribute](#title-attribute)
+* [Ember Version Compatibility](#ember-version-compatibility)
+* [Installing the Add-on](#installing-the-add-on)
+* [Using the Add-on](#using-the-add-on)
 * [Customize with Sass/Scss or Less](#customize-with-sassscss-or-less)
 * [Excluding assets](#excluding-assets)
 
+### Ember Version Compatibility
 
-### Installing the add-on
+Please consult the table to check which version of ember-cli-font-awesome you
+should use:
+
+Addon version         | Ember version
+----------------------|--------------
+`>= 2.0.0`, `< 3.0.0` | `>= 2.3.0`
+`>= 1.0.0`, `< 2.0.0` | `>= 1.11.0`
+`>= 0.1.0`, `< 1.0.0` | `>= 1.13.0`
+`0.0.9`               | `< 1.11.0`
+
+
+### Installing the Add-on
 
 In your application's directory:
 ```bash
@@ -45,30 +44,12 @@ run:
 $ ember generate ember-cli-font-awesome
 ```
 
-#### Ember Compatibility
+### Using the Add-on
 
-Version `>= 1.0.0` of this addon is compatible with Ember `>= 1.11.X` and
-requires Ember CLI `>= 1.13.X`.
-Version `>= 0.1.0 < 1.0.0` of this addon is compatible with Ember `>= 1.13.X`
-and requires Ember CLI `>= 1.13.X`
-
-If you need compatibility with Ember `< 1.11.X` then you should try version
-`0.0.9`
-
-
-### Using the `fa` components
-
-In your Handlebars templates:
+Use the component in your Handlebars templates:
 
 ```hbs
 {{fa-icon "camera"}}
-```
-
-__NOTE:__ With Ember versions `1.11.X` and `1.12.X` you must specify the the
-icon as a hash param, as these versions do not support `positionalParam`.
-
-```hbs
-{{fa-icon icon="camera"}}
 ```
 
 This will render:
@@ -76,20 +57,14 @@ This will render:
 <i class="fa fa-camera"></i>
 ```
 
-If you prefer, you can use the `fa-` prefix in the icon name.
-
-```hbs
-{{fa-icon "fa-camera"}}
-{{fa-icon "camera"}}
-```
-
-[Complete list of Font Awesome icons](http://fortawesome.github.io/Font-Awesome/icons/)
+To see which icons are available please check the
+[complete list of Font Awesome icons](http://fortawesome.github.io/Font-Awesome/icons/)
 
 The [Font Awesome examples](http://fortawesome.github.io/Font-Awesome/examples/)
-illustrate the various options and their effects. It should be obvious how these
-options map to their `fa-icon` counterparts.
+illustrate the various options and their effects. It should be fairly simple to
+map these options to their `{{fa-icon}}` counterparts.
 
-#### Different icon sizes
+#### Larger Icons
 
 ```hbs
 {{fa-icon "star" size="lg"}}
@@ -99,55 +74,7 @@ options map to their `fa-icon` counterparts.
 {{fa-icon "star" size=5}}
 ```
 
-#### Rotate
-
-```hbs
-{{fa-icon "camera" rotate=90}}
-{{fa-icon "camera" rotate=180}}
-{{fa-icon "camera" rotate=270}}
-```
-
-#### Flip
-
-```hbs
-{{fa-icon "bicycle" flip="horizontal"}}
-{{fa-icon "car" flip="vertical"}}
-```
-
-#### Spin
-
-```hbs
-{{fa-icon "refresh" spin=true}}
-```
-
-#### Pulse
-
-```hbs
-{{fa-icon "spinner" pulse=true}}
-```
-
-#### Inverse
-
-```hbs
-{{fa-icon "circle" inverse=true}}
-```
-
-#### List icons
-
-```hbs
-{{fa-icon "star" listItem=true}}
-```
-
-The `{{fa-list}}` component yields a `{{fa-icon}}` with `listItem` set to true:
-
-```hbs
-{{#fa-list as |l|}}
-  <li>{{l.fa-icon "star"}}Item 1</li>
-  <li>{{l.fa-icon "star"}}Item 2</li>
-{{/fa-list}}
-```
-
-#### Fixed width icons
+#### Fixed Width Icons
 
 ```hbs
 <div class="list-group">
@@ -160,7 +87,18 @@ The `{{fa-list}}` component yields a `{{fa-icon}}` with `listItem` set to true:
 </div>
 ```
 
-#### Bordered & pulled icons
+#### List Icons
+
+```hbs
+{{#fa-list as |l|}}
+  <li>{{l.fa-icon "check-square"}}List icons</li>
+  <li>{{l.fa-icon "check-square"}}can be used</li>
+  <li>{{l.fa-icon "spinner" spin=true}}as bullets</li>
+  <li>{{l.fa-icon "square"}}in lists</li>
+{{/fa-list}}
+```
+
+#### Bordered & Pulled Icons
 
 ```hbs
 <p>
@@ -171,22 +109,62 @@ current, borne back ceaselessly into the past.
 </p>
 ```
 
-#### Stacked icons
+#### Animated Icons
+
+```hbs
+{{fa-icon "spinner" spin=true}}
+{{fa-icon "circle-o-notch spin=true}}
+{{fa-icon "refresh" spin=true}}
+{{fa-icon "cog" spin=true}}
+{{fa-icon "spinner" pulse=true}}
+```
+
+#### Rotate & Flipped
+
+```hbs
+{{fa-icon "shield"}} normal
+{{fa-icon "shield" rotate=90}} rotated 90 degrees
+{{fa-icon "shield" rotate=180}} rotated 180 degrees
+{{fa-icon "shield" rotate=270}} rotated 270 degrees
+{{fa-icon "shield" flip="horizontal"}} flipped horizontal
+{{fa-icon "shield" flip="vertical"}} flipped vertical
+```
+
+#### Stacked Icons
 
 ```hbs
 {{#fa-stack size="lg" as |s|}}
-  {{s.stack-2x "fa-square-o"}}
-  {{s.stack-1x "fa-twitter"}}
+  {{s.stack-2x "square-o"}}
+  {{s.stack-1x "twitter"}}
+{{/fa-stack}}
+
+{{#fa-stack size="lg" as |s|}}
+  {{s.stack-2x "circle"}}
+  {{s.stack-1x "flag" inverse=true}}
+{{/fa-stack}}
+
+{{#fa-stack size="lg" as |s|}}
+  {{s.stack-2x "square"}}
+  {{s.stack-1x "terminal" inverse=true}}
+{{/fa-stack}}
+
+{{#fa-stack size="lg" as |s|}}
+  {{s.stack-2x "square"}}
+  {{s.stack-1x "terminal" class="text-danger"}}
 {{/fa-stack}}
 ```
 
-#### aria-hidden attribute
+#### The `aria-hidden` Attribute
 
-To better support accessibility (i.e. screen readers), the helper now generates an `aria-hidden` attribute by default:
+To better support accessibility (i.e. screen readers), the helper adds the
+`aria-hidden` attribute by default:
 
 ```hbs
 {{fa-icon "star"}}
-{{!-- results in: --}}
+```
+
+Results in:
+```html
 <i class="fa fa-star" aria-hidden="true"></i>
 ```
 
@@ -194,8 +172,6 @@ To remove the `aria-hidden` attribute:
 
 ```hbs
 {{fa-icon "star" ariaHidden=false}}
-{{!-- results in: --}}
-<i class="fa fa-star"></i>
 ```
 
 #### Actions
@@ -206,21 +182,28 @@ You can respond to actions on the icon by passing on action handlers:
 {{fa-icon "star" click=(action "myClickHandler")}}
 ```
 
-#### Tag name
+#### Tag Name
 
 Use `tagName` to control the generated markup:
 
 ```hbs
 {{fa-icon "star" tagName="span"}}
-{{!-- results in: --}}
+```
+Results in:
+
+```html
 <span class="fa fa-star"></span>
 ```
 
-#### Custom class names
+#### Custom Class Names
 
 ```hbs
 {{fa-icon "bicycle" class="my-custom-class"}}
-{{!-- results in: --}}
+```
+
+Results in:
+
+```html
 <i class="fa fa-bicycle my-custom-class"></i>
 ```
 
@@ -228,10 +211,13 @@ Use `tagName` to control the generated markup:
 
 ```hbs
 {{fa-icon "edit" title="Edit the item"}}
-{{!-- results in: --}}
-<i class="fa fa-edit" title="Edit the item"></i>
 ```
 
+Results in:
+
+```html
+<i class="fa fa-edit" title="Edit the item"></i>
+```
 
 ### Customize with Sass/Scss or Less
 
