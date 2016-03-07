@@ -175,8 +175,8 @@ current, borne back ceaselessly into the past.
 
 ```hbs
 {{#fa-stack size="lg" as |s|}}
-  {{s.fa-icon-2x "fa-square-o"}}
-  {{s.fa-icon-1x "fa-twitter"}}
+  {{s.stack-2x "fa-square-o"}}
+  {{s.stack-1x "fa-twitter"}}
 {{/fa-stack}}
 ```
 

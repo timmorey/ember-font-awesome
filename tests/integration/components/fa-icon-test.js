@@ -6,255 +6,183 @@ moduleForComponent('fa-icon', 'Integration | Component | {{fa-icon}}', {
   integration: true
 });
 
-test('it renders an I element with class fa', function(assert) {
+test("An <i> element with the class 'fa' is rendered", function(assert) {
   this.render(hbs`{{fa-icon}}`);
 
   let $icon = this.$('i');
-  assert.equal($icon.length, 1);
-  assert.ok($icon.hasClass('fa'));
+  assert.equal($icon.length, 1, 'An <i> element is rendered');
+  assert.ok($icon.hasClass('fa'), "The <i> element should have the 'fa' class");
 });
 
-test('it renders an icon with given icon class', function(assert) {
+test("I can set the specific icon using the 'icon' property", function(assert) {
   this.render(hbs`{{fa-icon icon="credit-card"}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-credit-card'));
+  assert.ok($icon.hasClass('fa-credit-card'), "The <i> element should have the 'fa-credit-card' class");
 });
 
-if (!Ember.VERSION.match(/^(1.11|1.12)/)) {
-  test('it renders an icon with icon class as positional param', function(assert) {
-    this.render(hbs`{{fa-icon "credit-card"}}`);
-    let $icon = this.$('i');
-    assert.ok($icon.hasClass('fa-credit-card'));
-  });
-}
+test('I can set the specific icon using the first positional param', function(assert) {
+  this.render(hbs`{{fa-icon "credit-card"}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-credit-card'), "The <i> element should have the 'fa-credit-card' class");
+});
 
-test('it does not add the class fa-undefined when icon is null/undefined', function(assert) {
+test("'undefined' is not present in the class list", function(assert) {
   this.render(hbs`{{fa-icon}}`);
-  let $icon = this.$('i');
-  assert.ok(!$icon.hasClass('fa-undefined'));
+  let { className } = this.$('i').get(0);
+  assert.ok(className.indexOf('undefined') === -1, "The <i> element should not have the 'undefined' class");
 });
 
-test('icon names with the fa- prefix are also accepted', function(assert) {
+test("The value supplied to the 'icon' property may include the 'fa-' prefix", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-credit-card'));
+  assert.ok($icon.hasClass('fa-credit-card'), "The <i> element should have the 'fa-credit-card' class");
 });
 
-test('fa-spin', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" spin=true}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-spin'));
-});
-
-test('fa-flip horizontal', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" flip="horizontal"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-flip-horizontal'));
-});
-
-test('fa-flip vertical', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" flip="vertical"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-flip-vertical'));
-});
-
-test('fa-flip no flip', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
-  let $icon = this.$('i');
-  assert.ok(!$icon.hasClass('fa-flip-undefined'));
-});
-
-test('fa-flip prefixed with fa-flip', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" flip="fa-flip-vertical"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-flip-vertical'));
-});
-
-test('fa-rotate 90', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" rotate="90"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-rotate-90'));
-});
-
-test('fa-rotate 180', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" rotate="180"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-rotate-180'));
-});
-
-test('fa-rotate 270', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" rotate="270"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-rotate-270'));
-});
-
-test('fa-rotate with number', function(assert) {
-  this.set('rotate', 90);
-  this.render(hbs`{{fa-icon icon="fa-credit-card" rotate=rotate}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-rotate-90'));
-});
-
-test('fa-rotate no rotation', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
-  let $icon = this.$('i');
-  assert.ok(!$icon.hasClass('fa-rotate-undefined'));
-});
-
-test('fa-rotate prefixed with fa-rotate', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" rotate="fa-rotate-270"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-rotate-270'));
-});
-
-test('size 2x', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" size="2x"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-2x'));
-});
-
-test('size 2', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" size="2"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-2x'));
-});
-
-test('size as a number', function(assert) {
-  this.set('size', 2);
-  this.render(hbs`{{fa-icon icon="fa-credit-card" size=size}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-2x'));
-});
-
-test('size fa-3x', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" size="fa-3x"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-3x'));
-});
-
-test('size lg', function(assert) {
+test(`I can set the size property to 'lg'`, function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" size="lg"}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-lg'));
+  assert.ok($icon.hasClass('fa-lg'), `The <i> element should have the 'fa-lg' class`);
 });
 
-test('fixedWidth', function(assert) {
+[2, 3, 4, 5].forEach((size) => {
+  test(`I can set the size property as a number - size=${size}`, function(assert) {
+    this.set('size', size);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" size=size}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-${size}x`), `The <i> element should have the 'fa-${size}x' class`);
+  });
+
+  test(`I can set the size property as a string - size="${size}"`, function(assert) {
+    this.set('size', `${size}`);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" size=size}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-${size}x`), `The <i> element should have the 'fa-${size}x' class`);
+  });
+
+  test(`I can set this size property as a string - size="${size}x"`, function(assert) {
+    this.set('size', `${size}x`);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" size=size}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-${size}x`), `The <i> element should have the 'fa-${size}x' class`);
+  });
+});
+
+test("Setting the fixedWidth property adds the 'fa-fw' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" fixedWidth=true}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-fw'));
+  assert.ok($icon.hasClass('fa-fw'), "The <i> element should have the 'fa-fw' class");
 });
 
-test('fa-li', function(assert) {
+test("Setting the listItem property adds the 'fa-li' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" listItem=true}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-li'));
+  assert.ok($icon.hasClass('fa-li'), "The <i> element should have the 'fa-li' class");
 });
 
-test('fa-border', function(assert) {
+test("Setting the border property adds the 'fa-border' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" border=true}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-border'));
+  assert.ok($icon.hasClass('fa-border'), "The <i> element should have the 'fa-border' class");
 });
 
-test('fa-pull left', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" pull="left"}}`);
+['left', 'right'].forEach((direction) => {
+  test(`Setting the pull property to '${direction}' adds the 'fa-pull-${direction}' class`, function(assert) {
+    this.set('direction', direction);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" pull=direction}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-pull-${direction}`), `The <i> element should have the 'fa-pull-${direction}' class`);
+  });
+});
+
+test("Setting the spin property adds the 'fa-spin' class", function(assert) {
+  this.render(hbs`{{fa-icon icon="fa-credit-card" spin=true}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-pull-left'));
+  assert.ok($icon.hasClass('fa-spin'), "The <i> element should have the 'fa-spin' class");
 });
 
-test('fa-pull right', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" pull="right"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-pull-right'));
-});
-
-test('fa-pull with fa-prefix', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
-  let $icon = this.$('i');
-  assert.ok(!$icon.hasClass('fa-pull-undefined'));
-});
-
-test('fa-pulse', function(assert) {
+test("Setting the pulse property adds the 'fa-pulse' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" pulse=true}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-pulse'));
+  assert.ok($icon.hasClass('fa-pulse'), "The <i> element should have the 'fa-pulse' class");
 });
 
-test('fa-stack 1x', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" stack="1x"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-stack-1x'));
+[90, 180, 270].forEach((deg) => {
+  test(`I can set the rotate property as a number - rotate=${deg}`, function(assert) {
+    this.set('deg', deg);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" rotate=deg}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-rotate-${deg}`), `The <i> element should have the 'fa-rotate-${deg}' class`);
+  });
+
+  test(`I can set the rotate property as a string - rotate="${deg}"`, function(assert) {
+    this.set('deg', `${deg}`);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" rotate=deg}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-rotate-${deg}`), `The <i> element should have the 'fa-rotate-${deg}' class`);
+  });
 });
 
-test('fa-stack 2x', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" stack="2x"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-stack-2x'));
+['horizontal', 'vertical'].forEach((direction) => {
+  test(`I can set the the flip property to '${direction}'`, function(assert) {
+    this.set('direction', direction);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" flip=direction}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-flip-${direction}`), `The <i> element should have the 'fa-flip-${direction}' class`);
+  });
 });
 
-test('fa-stack 2', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" stack="2"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-stack-2x'));
+[1, 2].forEach((size) => {
+  test(`I can set the stack property as a number - stack=${size}`, function(assert) {
+    this.set('size', size);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
+  });
+
+  test(`I can set the stack property as a string - stack="${size}"`, function(assert) {
+    this.set('size', `${size}`);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
+  });
+
+  test(`I can set the stack property as a string - stack="${size}x"`, function(assert) {
+    this.set('size', `${size}x`);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
+    let $icon = this.$('i');
+    assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
+  });
 });
 
-test('fa-stack as a number', function(assert) {
-  this.set('stack', 2);
-  this.render(hbs`{{fa-icon icon="fa-credit-card" stack=stack}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-stack-2x'));
-});
-
-test('fa-stack fa-stack-2x', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" stack="fa-stack-2x"}}`);
-  let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-stack-2x'));
-});
-
-test('fa-stack no stack', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
-  let $icon = this.$('i');
-  assert.ok(!$icon.hasClass('fa-stack-undefined'));
-});
-
-test('fa-inverse', function(assert) {
+test("Setting the inverse property adds the 'fa-inverse' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" inverse=true}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('fa-inverse'));
+  assert.ok($icon.hasClass('fa-inverse'), "The <i> element should have the 'fa-inverse' class");
 });
 
-test('aria-hidden true', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" ariaHidden=true}}`);
-  let $icon = this.$('i');
-  assert.equal($icon.attr('aria-hidden'), 'true');
+[[true, 'true'], [false, undefined], [undefined, 'true']].forEach(([input, result]) => {
+  test(`Setting the aria-hidden property to '${input}' set the aria-hidden attribute to '${result}'`, function(assert) {
+    this.set('input', input);
+    this.render(hbs`{{fa-icon icon="fa-credit-card" ariaHidden=input}}`);
+    let $icon = this.$('i');
+    assert.equal($icon.attr('aria-hidden'), result, `The aria-hidden attribute of the <i> element should be '${result}`);
+  });
 });
 
-test('aria-hidden false', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card" ariaHidden=false}}`);
-  let $icon = this.$('i');
-  assert.equal($icon.attr('aria-hidden'), undefined);
-});
-
-test('aria-hidden not set', function(assert) {
-  this.render(hbs`{{fa-icon icon="fa-credit-card"}}`);
-  let $icon = this.$('i');
-  assert.equal($icon.attr('aria-hidden'), 'true');
-});
-
-test('title', function(assert) {
+test('I can set the title attribute', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" title="foo bar"}}`);
   let $icon = this.$('i');
-  assert.equal($icon.attr('title'), 'foo bar');
+  assert.equal($icon.attr('title'), 'foo bar', "The title attribute of the <i> element should be 'foo bar'");
 });
 
-test('tagName', function(assert) {
+test('I can alter the tagName of the icon', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" tagName="span"}}`);
   let $icon = this.$('span');
-  assert.equal($icon.length, 1);
+  assert.equal($icon.length, 1, 'The icon should be a <span> element');
 });
 
-test('custom class names', function(assert) {
+test('I can add custom class names', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" class="custom-class"}}`);
   let $icon = this.$('i');
-  assert.ok($icon.hasClass('custom-class'));
+  assert.ok($icon.hasClass('custom-class'), "The icon should have the 'custom-class' class");
 });

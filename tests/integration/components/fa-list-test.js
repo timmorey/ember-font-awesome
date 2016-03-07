@@ -5,15 +5,15 @@ moduleForComponent('fa-list', 'Integration | Component | {{fa-list}}', {
   integration: true
 });
 
-test('It is an ul tag with fa-ul class', function(assert) {
+test("An <ul> element with the class 'fa-ul' is rendered", function(assert) {
   this.render(hbs`{{fa-list}}`);
 
   let $list = this.$('ul');
-  assert.equal($list.length, 1);
-  assert.ok($list.hasClass('fa-ul'));
+  assert.equal($list.length, 1, 'An <ul> element is rendered');
+  assert.ok($list.hasClass('fa-ul'), "The <ul> element should have the 'fa-ul' class");
 });
 
-test('It yields a fa-icon with listItem=true to a block', function(assert) {
+test('A contextual {{fa-icon}} component with listItem=true is yielded to a block', function(assert) {
   this.render(hbs`
     {{#fa-list as |l|}}
       <li>{{l.fa-icon icon="star"}}Item 1</li>
@@ -22,5 +22,6 @@ test('It yields a fa-icon with listItem=true to a block', function(assert) {
   `);
 
   let $icons = this.$('i');
-  assert.equal($icons.length, 2);
+  assert.equal($icons.length, 2, 'Two <i> elements are rendered');
+  assert.ok($icons.hasClass('fa-li'), "The <i> elements have the 'fa-li' class");
 });
