@@ -86,7 +86,7 @@ const FaIconComponent = Ember.Component.extend({
 
   @computed('ariaHidden')
   ariaHiddenAttribute(ariaHidden) {
-    return ariaHidden !== false ? true : undefined;
+    return ariaHidden !== false ? 'true' : undefined;
   }
 });
 
