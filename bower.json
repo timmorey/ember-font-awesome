@@ -1,6 +1,3 @@
 {
-  "name": "ember-font-awesome",
-  "dependencies": {
-    "font-awesome": "~4.6.0"
-  }
+  "name": "ember-font-awesome"
 }
