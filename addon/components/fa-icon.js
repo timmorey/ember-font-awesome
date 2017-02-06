@@ -4,6 +4,8 @@ import computed from 'ember-computed-decorators';
 import tryMatch from '../utils/try-match';
 import optional from '../utils/optional-decorator';
 
+const { isArray } = Ember;
+
 const FaIconComponent = Ember.Component.extend({
   tagName: 'i',
 
@@ -39,7 +41,7 @@ const FaIconComponent = Ember.Component.extend({
 
   @computed('icon', 'params.[]')
   iconCssClass(icon, params) {
-    icon = icon || params[0];
+    icon = icon || isArray(params) && params[0];
     if (icon) {
       return tryMatch(icon, /^fa-/) ? icon : `fa-${icon}`;
     }
