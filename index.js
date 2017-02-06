@@ -25,12 +25,10 @@ module.exports = {
   },
 
   treeForVendor: function(tree) {
-    var faTree = new Funnel(faPath, {
+    return new Funnel(faPath, {
       destDir: 'font-awesome',
       include: ['css/*', 'fonts/*', 'less/*', 'scss/*']
     });
-
-    return merge([tree, faTree]);
   },
 
   included: function(app, parentAddon) {
