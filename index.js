@@ -4,6 +4,10 @@
 var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
+var Funnel = require('broccoli-funnel');
+var merge = require('broccoli-merge-trees');
+
+var faPath = path.dirname(require.resolve('font-awesome/package.json'));
 
 module.exports = {
   name: 'ember-font-awesome',
@@ -18,6 +22,15 @@ module.exports = {
     if (this.options.babel.optional.indexOf('es7.decorators') === -1) {
       this.options.babel.optional.push('es7.decorators');
     }
+  },
+
+  treeForVendor: function(tree) {
+    var faTree = new Funnel(faPath, {
+      destDir: 'font-awesome',
+      include: ['css/*', 'fonts/*', 'less/*', 'scss/*']
+    });
+
+    return merge([tree, faTree]);
   },
 
   included: function(app, parentAddon) {
@@ -51,11 +64,11 @@ module.exports = {
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
     var options = target.options['ember-font-awesome'] || {};
 
-    var faPath = path.join(target.bowerDirectory, 'font-awesome');
-    var scssPath = path.join(faPath, 'scss');
-    var lessPath = path.join(faPath, 'less');
-    var cssPath = path.join(faPath, 'css');
-    var fontsPath = path.join(faPath, 'fonts');
+    var scssPath = 'vendor/font-awesome/scss';
+    var lessPath = 'vendor/font-awesome/less';
+    var cssPath = 'vendor/font-awesome/css';
+    var fontsPath = 'vendor/font-awesome/fonts';
+    var absoluteFontsPath = path.join(faPath, 'fonts');
 
     // Ensure the font-awesome path is added to the ember-cli-sass addon options
     // (Taking a cue from the Babel options above)
@@ -77,14 +90,6 @@ module.exports = {
       }
     }
 
-    // Make sure font-awesome is available
-    if (!fs.existsSync(faPath)) {
-      throw new Error(
-        this.name + ': font-awesome is not available from bower (' + faPath + '), ' +
-        'install it into your project by running `bower install font-awesome --save`'
-      );
-    }
-
     // Early out if no assets should be imported
     if ('includeFontAwesomeAssets' in options && !options.includeFontAwesomeAssets) {
       return;
@@ -101,7 +106,7 @@ module.exports = {
     // Import all files in the fonts folder when option not defined or enabled
     if (!('includeFontFiles' in options) || options.includeFontFiles) {
       // Get all of the font files
-      var fontsToImport = fs.readdirSync(fontsPath);
+      var fontsToImport = fs.readdirSync(absoluteFontsPath);
       var filesInFonts  = []; // Bucket for filenames already in the fonts folder
       var fontsSkipped  = []; // Bucket for fonts not imported because they already have been
 
