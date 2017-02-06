@@ -37,12 +37,6 @@ In your application's directory:
 $ ember install ember-font-awesome
 ```
 
-If you have manually installed or updated the addon via NPM then you should also
-run:
-```bash
-$ ember generate ember-font-awesome
-```
-
 ### Using the Add-on
 
 Use the component in your Handlebars templates:
