@@ -1,9 +1,4 @@
 {
   "name": "ember-font-awesome",
-  "dependencies": {
-    "font-awesome": "~4.6.0"
-  },
-  "resolutions": {
-    "ember": "canary"
-  }
+  "dependencies": {}
 }
