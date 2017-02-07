@@ -51,7 +51,7 @@ module.exports = {
     var options = target.options['ember-font-awesome'] || {};
 
     var scssPath = path.join(faPath, 'scss');
-    var lessPath = 'vendor/font-awesome/less';
+    var lessPath = path.join(faPath, 'less');
     var cssPath = 'vendor/font-awesome/css';
     var fontsPath = 'vendor/font-awesome/fonts';
     var absoluteFontsPath = path.join(faPath, 'fonts');
