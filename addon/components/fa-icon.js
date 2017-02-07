@@ -1,10 +1,11 @@
 import Ember from 'ember';
-import computed from 'ember-computed-decorators';
-
 import tryMatch from '../utils/try-match';
-import optional from '../utils/optional-decorator';
 
-const { isArray } = Ember;
+const {
+  computed,
+  get,
+  isArray
+} = Ember;
 
 const FaIconComponent = Ember.Component.extend({
   tagName: 'i',
@@ -32,40 +33,44 @@ const FaIconComponent = Ember.Component.extend({
     'style'
   ],
 
-  @computed('color')
-  @optional
-  style(color) {
+  style: computed('color', function() {
+    let color = get(this, 'color');
     if (!color) { return; }
     return Ember.String.htmlSafe(`color:${color}`);
-  },
+  }),
 
-  @computed('icon', 'params.[]')
-  iconCssClass(icon, params) {
+  iconCssClass: computed('icon', 'params.[]', function() {
+    let icon = get(this, 'icon');
+    let params = get(this, 'params');
+
     icon = icon || isArray(params) && params[0];
+
     if (icon) {
       return tryMatch(icon, /^fa-/) ? icon : `fa-${icon}`;
     }
-  },
+  }),
 
-  @computed('flip')
-  @optional
-  flipCssClass(flip) {
+  flipCssClass: computed('flip', function() {
+    let flip = get(this, 'flip');
+    if (!flip) { return; }
     return tryMatch(flip, /^fa-flip/) ? flip : `fa-flip-${flip}`;
-  },
+  }),
 
-  @computed('rotate')
-  @optional
-  rotateCssClass(rotate) {
+  rotateCssClass: computed('rotate', function() {
+    let rotate = get(this, 'rotate');
+    if (!rotate) { return; }
+
     if (tryMatch(rotate, /^fa-rotate/)) {
       return rotate;
     } else {
       return `fa-rotate-${rotate}`;
     }
-  },
+  }),
 
-  @computed('size')
-  @optional
-  sizeCssClass(size) {
+  sizeCssClass: computed('size', function() {
+    let size = get(this, 'size');
+    if (!size) { return ; }
+
     if (tryMatch(size, /^fa-/)) {
       return size;
     } else if (tryMatch(size, /(?:lg|x)$/)) {
@@ -73,17 +78,18 @@ const FaIconComponent = Ember.Component.extend({
     } else {
       return `fa-${size}x`;
     }
-  },
+  }),
 
-  @computed('pull')
-  @optional
-  pullCssClass(pull) {
+  pullCssClass: computed('pull', function() {
+    let pull = get(this, 'pull');
+    if (!pull) { return ; }
     return `fa-pull-${pull}`;
-  },
+  }),
 
-  @computed('stack')
-  @optional
-  stackCssClass(stack) {
+  stackCssClass: computed('stack', function() {
+    let stack = get(this, 'stack');
+    if (!stack) { return; }
+
     if (tryMatch(stack, /^fa-/)) {
       return stack;
     } else if (tryMatch(stack, /x$/)) {
@@ -91,12 +97,12 @@ const FaIconComponent = Ember.Component.extend({
     } else {
       return `fa-stack-${stack}x`;
     }
-  },
+  }),
 
-  @computed('ariaHidden')
-  ariaHiddenAttribute(ariaHidden) {
+  ariaHiddenAttribute: computed('ariaHidden', function() {
+    let ariaHidden = get(this, 'ariaHidden');
     return ariaHidden !== false ? 'true' : undefined;
-  }
+  })
 });
 
 FaIconComponent.reopenClass({
