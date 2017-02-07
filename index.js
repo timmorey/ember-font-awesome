@@ -62,7 +62,7 @@ module.exports = {
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
     var options = target.options['ember-font-awesome'] || {};
 
-    var scssPath = 'vendor/font-awesome/scss';
+    var scssPath = path.join(faPath, 'scss');
     var lessPath = 'vendor/font-awesome/less';
     var cssPath = 'vendor/font-awesome/css';
     var fontsPath = 'vendor/font-awesome/fonts';
