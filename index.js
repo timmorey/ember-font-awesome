@@ -12,18 +12,6 @@ var faPath = path.dirname(require.resolve('font-awesome/package.json'));
 module.exports = {
   name: 'ember-font-awesome',
 
-  init: function(app) {
-    this._super.init && this._super.init.apply(this, arguments);
-    // Enable ES7 decorators via Babel
-    // https://www.npmjs.com/package/ember-computed-decorators#setup-with-addon
-    this.options = this.options || {};
-    this.options.babel = this.options.babel || {};
-    this.options.babel.optional = this.options.babel.optional || [];
-    if (this.options.babel.optional.indexOf('es7.decorators') === -1) {
-      this.options.babel.optional.push('es7.decorators');
-    }
-  },
-
   treeForVendor: function(tree) {
     return new Funnel(faPath, {
       destDir: 'font-awesome',
@@ -137,7 +125,6 @@ module.exports = {
           '`includeFontFiles:false` for the "' + this.name + '" options in your ember-cli-build.js'
         ));
       }
-
     }
   }
 };

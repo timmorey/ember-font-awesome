@@ -1,10 +1,11 @@
 import Ember from 'ember';
-
-import computed from 'ember-computed-decorators';
-
 import tryMatch from '../utils/try-match';
-import optional from '../utils/optional-decorator';
 import layout from '../templates/components/fa-stack';
+
+const {
+  computed,
+  get
+} = Ember;
 
 export default Ember.Component.extend({
   layout,
@@ -13,9 +14,10 @@ export default Ember.Component.extend({
   classNames: 'fa-stack',
   classNameBindings: ['sizeCssClass'],
 
-  @computed('size')
-  @optional
-  sizeCssClass(size) {
+  sizeCssClass: computed('size', function() {
+    let size = get(this, 'size');
+    if (!size) { return; }
+
     if (tryMatch(size, /^fa-/)) {
       return size;
     } else if (tryMatch(size, /(?:lg|x)$/)) {
@@ -23,5 +25,5 @@ export default Ember.Component.extend({
     } else {
       return `fa-${size}x`;
     }
-  }
+  })
 });
