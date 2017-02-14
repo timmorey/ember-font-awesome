@@ -13,9 +13,12 @@ module.exports = {
   name: 'ember-font-awesome',
 
   treeForVendor: function(tree) {
+    // Get configured fontFilePattern
+    let fontFilePattern = this.options.fontFilePattern || "*.{eot,svg,ttf,woff,woff2,otf}";
+    // Funnel required font types
     return new Funnel(faPath, {
       destDir: 'font-awesome',
-      include: ['css/*', 'fonts/*']
+      include: ['css/*', `fonts/${fontFilePattern}`]
     });
   },
 
@@ -49,6 +52,8 @@ module.exports = {
     var target = (parentAddon || app);
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
     var options = target.options['ember-font-awesome'] || {};
+
+    this.options = options;
 
     var scssPath = path.join(faPath, 'scss');
     var lessPath = path.join(faPath, 'less');
