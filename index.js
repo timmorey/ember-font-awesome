@@ -5,14 +5,13 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
 var Funnel = require('broccoli-funnel');
-var merge = require('broccoli-merge-trees');
 
 var faPath = path.dirname(require.resolve('font-awesome/package.json'));
 
 module.exports = {
   name: 'ember-font-awesome',
 
-  treeForVendor: function(tree) {
+  treeForVendor: function() {
     // Get configured fontFormats
     let fontFormats = this.options.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
     let fontFormatsString = fontFormats.join(',');
