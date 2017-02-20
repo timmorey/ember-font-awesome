@@ -13,12 +13,20 @@ module.exports = {
   name: 'ember-font-awesome',
 
   treeForVendor: function(tree) {
-    // Get configured fontFilePattern
-    let fontFilePattern = this.options.fontFilePattern || "*.{eot,svg,ttf,woff,woff2,otf}";
+    // Get configured fontFormats
+    let fontFormats = this.options.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
+    let fontFormatsString = fontFormats.join(',');
+    // Define fontFormatPattern
+    let fontFormatPattern;
+    if (fontFormats.length > 1) {
+      fontFormatPattern = `*.{${fontFormatsString}}`;
+    } else {
+      fontFormatPattern = `*.${fontFormatsString}`;
+    }
     // Funnel required font types
     return new Funnel(faPath, {
       destDir: 'font-awesome',
-      include: ['css/*', `fonts/${fontFilePattern}`]
+      include: ['css/*', `fonts/${fontFormatPattern}`]
     });
   },
 

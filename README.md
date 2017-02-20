@@ -246,15 +246,15 @@ var app = new EmberApp({
 });
 ```
 
-You can also configure the addon to _only_ import specific font file types by adding
+You can also configure the addon to _only_ import specific font formats by adding
 the following configuration in `ember-cli-build.js`:
 
-**Default:** `*.{eot,svg,ttf,woff,woff2,otf}`
+**Default:** `['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf']`
 
 ```js
 var app = new EmberApp({
   'ember-font-awesome': {
-    fontFilePattern: "*.{woff,woff2}"
+    fontFormats: ['woff', 'woff2']
   }
 });
 ```
