@@ -5,17 +5,27 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
 var Funnel = require('broccoli-funnel');
-var merge = require('broccoli-merge-trees');
 
 var faPath = path.dirname(require.resolve('font-awesome/package.json'));
 
 module.exports = {
   name: 'ember-font-awesome',
 
-  treeForVendor: function(tree) {
+  treeForVendor: function() {
+    // Get configured fontFormats
+    let fontFormats = this.options.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
+    let fontFormatsString = fontFormats.join(',');
+    // Define fontFormatPattern
+    let fontFormatPattern;
+    if (fontFormats.length > 1) {
+      fontFormatPattern = `*.{${fontFormatsString}}`;
+    } else {
+      fontFormatPattern = `*.${fontFormatsString}`;
+    }
+    // Funnel required font types
     return new Funnel(faPath, {
       destDir: 'font-awesome',
-      include: ['css/*', 'fonts/*']
+      include: ['css/*', `fonts/${fontFormatPattern}`]
     });
   },
 
@@ -49,6 +59,8 @@ module.exports = {
     var target = (parentAddon || app);
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
     var options = target.options['ember-font-awesome'] || {};
+
+    this.options = options;
 
     var scssPath = path.join(faPath, 'scss');
     var lessPath = path.join(faPath, 'less');

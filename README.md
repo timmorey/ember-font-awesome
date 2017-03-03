@@ -246,7 +246,20 @@ var app = new EmberApp({
 });
 ```
 
-In addition, you can configure the addon to _just_ exclude the font file assets by adding
+You can also configure the addon to _only_ import specific font formats by adding
+the following configuration in `ember-cli-build.js`:
+
+**Default:** `['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf']`
+
+```js
+var app = new EmberApp({
+  'ember-font-awesome': {
+    fontFormats: ['woff', 'woff2']
+  }
+});
+```
+
+In addition, you can configure the addon to exclude the font file assets entirely by adding
 the following configuration in `ember-cli-build.js`:
 
 ```js
