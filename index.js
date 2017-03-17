@@ -13,7 +13,7 @@ module.exports = {
 
   treeForVendor: function() {
     // Get configured fontFormats
-    let fontFormats = this.options.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
+    let fontFormats = this.hostBuildOptions.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
     let fontFormatsString = fontFormats.join(',');
     // Define fontFormatPattern
     let fontFormatPattern;
@@ -60,7 +60,7 @@ module.exports = {
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
     var options = target.options['ember-font-awesome'] || {};
 
-    this.options = options;
+    this.hostBuildOptions = options;
 
     var scssPath = path.join(faPath, 'scss');
     var lessPath = path.join(faPath, 'less');
