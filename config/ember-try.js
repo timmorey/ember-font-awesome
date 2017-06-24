@@ -1,4 +1,4 @@
-/*jshint node:true*/
+/* eslint-env node */
 module.exports = {
   scenarios: [
     {
@@ -12,7 +12,11 @@ module.exports = {
         }
       },
       npm: {
+        dependencies: {
+          'ember-cli-babel': '5.2.4'
+        },
         devDependencies: {
+          'ember-cli-htmlbars-inline-precompile': '0.3.11',
           'ember-source': null
         }
       }
@@ -25,6 +29,26 @@ module.exports = {
         },
         resolutions: {
           'ember': 'lts-2-8'
+        }
+      },
+      npm: {
+        dependencies: {
+          'ember-cli-babel': '5.2.4'
+        },
+        devDependencies: {
+          'ember-cli-htmlbars-inline-precompile': '0.3.11',
+          'ember-source': null
+        }
+      }
+    },
+    {
+      name: 'ember-2.10',
+      bower: {
+        dependencies: {
+          'ember': 'components/ember#2.10.2'
+        },
+        resolutions: {
+          'ember': '2-10-2'
         }
       },
       npm: {
