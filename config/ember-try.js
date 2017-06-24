@@ -12,7 +12,11 @@ module.exports = {
         }
       },
       npm: {
+        dependencies: {
+          'ember-cli-babel': '5.2.4'
+        },
         devDependencies: {
+          'ember-cli-htmlbars-inline-precompile': '0.3.11',
           'ember-source': null
         }
       }
@@ -28,7 +32,11 @@ module.exports = {
         }
       },
       npm: {
+        dependencies: {
+          'ember-cli-babel': '5.2.4'
+        },
         devDependencies: {
+          'ember-cli-htmlbars-inline-precompile': '0.3.11',
           'ember-source': null
         }
       }
