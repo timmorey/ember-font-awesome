@@ -5,8 +5,8 @@ var chalk = require('chalk');
 var fs = require('fs');
 var path = require('path');
 var Funnel = require('broccoli-funnel');
-
 var faPath = path.dirname(require.resolve('font-awesome/package.json'));
+var astTransform = require('./lib/ast-transform');
 
 module.exports = {
   name: 'ember-font-awesome',
@@ -14,7 +14,7 @@ module.exports = {
   setupPreprocessorRegistry(type, registry) {
     registry.add('htmlbars-ast-plugin', {
       name: 'font-awesome-static-transform',
-      plugin: require('./lib/ast-transform'),
+      plugin: astTransform,
       baseDir() {
         return __dirname;
       }
@@ -37,6 +37,16 @@ module.exports = {
       destDir: 'font-awesome',
       include: ['css/*', `fonts/${fontFormatPattern}`]
     });
+  },
+
+  postBuild() {
+    console.log('dynamic usages: ', Array.from(astTransform.dynamicInvocationsFound));
+    console.log('used icons: ', Array.from(astTransform.usedIcons));
+  },
+
+  preBuild() {
+    astTransform.dynamicInvocationsFound = false;
+    astTransform.usedIcons = new Set();
   },
 
   included: function(app, parentAddon) {
