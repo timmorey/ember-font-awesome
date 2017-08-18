@@ -11,6 +11,16 @@ var faPath = path.dirname(require.resolve('font-awesome/package.json'));
 module.exports = {
   name: 'ember-font-awesome',
 
+  setupPreprocessorRegistry(type, registry) {
+    registry.add('htmlbars-ast-plugin', {
+      name: 'font-awesome-static-transform',
+      plugin: require('./lib/ast-transform'),
+      baseDir() {
+        return __dirname;
+      }
+    });
+  },
+
   treeForVendor: function() {
     // Get configured fontFormats
     let fontFormats = this.hostBuildOptions.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
