@@ -60,7 +60,8 @@ test(`I can set the size property to 'lg'`, function(assert) {
     assert.ok($icon.hasClass(`fa-${size}x`), `The <i> element should have the 'fa-${size}x' class`);
   });
 
-  test(`I can set this size property as a string - size="${size}x"`, function(assert) {
+  skip(`I can set this size property as a string - size="${size}x"`, function(assert) {
+    // Proposed for feature removal
     this.set('size', `${size}x`);
     this.render(hbs`{{fa-icon icon="fa-credit-card" size=size}}`);
     let $icon = this.$('i');
