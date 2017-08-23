@@ -148,7 +148,8 @@ test("Setting the pulse property adds the 'fa-pulse' class", function(assert) {
     assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
   });
 
-  test(`I can set the stack property as a string - stack="${size}x"`, function(assert) {
+  skip(`I can set the stack property as a string - stack="${size}x"`, function(assert) {
+    // Proposed for removal
     this.set('size', `${size}x`);
     this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
     let $icon = this.$('i');
@@ -207,8 +208,15 @@ test('I can alter the tagName of the icon', function(assert) {
   assert.equal($icon.length, 1, 'The icon should be a <span> element');
 });
 
-test('I can add custom class names', function(assert) {
+test('I can add custom static class names', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" class="custom-class"}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass('custom-class'), "The icon should have the 'custom-class' class");
+});
+
+test('I can add custom dynamic class names', function(assert) {
+  this.customClass = 'custom-class';
+  this.render(hbs`{{fa-icon icon="fa-credit-card" class=customClass}}`);
   let $icon = this.$('i');
   assert.ok($icon.hasClass('custom-class'), "The icon should have the 'custom-class' class");
 });
