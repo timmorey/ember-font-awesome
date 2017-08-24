@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { skip } from 'qunit';
 
 moduleForComponent('fa-stack', 'Integration | Component | {{fa-stack}}', {
   integration: true
@@ -34,7 +35,7 @@ test(`I can set the size property to 'lg'`, function(assert) {
     assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
   });
 
-  test(`I can set this size property as a string - size="${size}x"`, function(assert) {
+  skip(`I can set this size property as a string - size="${size}x"`, function(assert) {
     this.set('size', `${size}x`);
     this.render(hbs`{{fa-stack size=size}}`);
     let $stack = this.$('span');
@@ -52,4 +53,6 @@ test('A block with stack contextual components is yielded', function(assert) {
 
   let $icons = this.$('i');
   assert.equal($icons.length, 2);
+  assert.ok($icons[0].classList.contains('fa-stack-2x'), 'The second icon has stack 2x');
+  assert.ok($icons[1].classList.contains('fa-stack-1x'), 'The second icon has stack 1x');
 });
