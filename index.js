@@ -7,6 +7,51 @@ var path = require('path');
 var Funnel = require('broccoli-funnel');
 var faPath = path.dirname(require.resolve('font-awesome/package.json'));
 var astTransform = require('./lib/ast-transform');
+var glimmerSyntax = require('@glimmer/syntax');
+let readdirRecursive = require('fs-readdir-recursive');
+var Plugin = require('broccoli-plugin');
+var path = require('path');
+
+// Create a subclass MyPlugin derived from Plugin
+FindUsedIcons.prototype = Object.create(Plugin.prototype);
+FindUsedIcons.prototype.constructor = FindUsedIcons;
+function FindUsedIcons(inputNodes, options) {
+  options = options || {};
+  Plugin.call(this, inputNodes, {
+    annotation: options.annotation || 'FindUsedIcons'
+  });
+  this.options = options;
+}
+
+FindUsedIcons.prototype.build = function() {
+  let options = this.options;
+  this.inputPaths.forEach(function(inputPath) {
+    let filePaths = readdirRecursive(inputPath);
+    filePaths.forEach(function(filePath) {
+      let usedIcons = options.usedFaIcons[filePath] = new Set();
+      let content = fs.readFileSync(path.join(inputPath, filePath), 'utf8');
+      let ast = glimmerSyntax.preprocess(content);
+      glimmerSyntax.traverse(ast, {
+        MustacheStatement(node) {
+          if (node.path.original === 'fa-icon') {
+            let iconValue = node.params[0];
+            if (!iconValue) {
+              let pair = node.hash.pairs.find(pair => pair.key === 'icon');
+              if (pair) {
+                iconValue = pair.value;
+              }
+            }
+            if (iconValue.type === 'StringLiteral') {
+              usedIcons.add(iconValue.value);
+            }
+          }
+        }
+      });
+    });
+  });
+};
+
+
 
 module.exports = {
   name: 'ember-font-awesome',
@@ -19,6 +64,13 @@ module.exports = {
         return __dirname;
       }
     });
+  },
+
+  preprocessTree(type, tree) {
+    if (type === 'template') {
+      return new FindUsedIcons([tree], { usedFaIcons: this.usedFaIcons });
+    }
+    return tree;
   },
 
   treeForVendor: function() {
@@ -40,17 +92,12 @@ module.exports = {
   },
 
   postBuild() {
-    console.log('dynamic usages: ', Array.from(astTransform.dynamicInvocationsFound));
-    console.log('used icons: ', Array.from(astTransform.usedIcons));
-  },
-
-  preBuild() {
-    astTransform.dynamicInvocationsFound = false;
-    astTransform.usedIcons = new Set();
+    let usedIcons = Array.from(Object.values(this.usedFaIcons).reduce((acum, set)=> new Set([...acum, ...set])));
+    console.log(`The app uses ${usedIcons.length} icons`);
   },
 
   included: function(app, parentAddon) {
-
+    this.usedFaIcons = {};
     // Quick fix for add-on nesting
     // https://github.com/aexmachina/ember-cli-sass/blob/v5.3.0/index.js#L73-L75
     // see: https://github.com/ember-cli/ember-cli/issues/3718
