@@ -6,52 +6,52 @@ var fs = require('fs');
 var path = require('path');
 var Funnel = require('broccoli-funnel');
 var faPath = path.dirname(require.resolve('font-awesome/package.json'));
-var astTransform = require('./lib/ast-transform');
-var glimmerSyntax = require('@glimmer/syntax');
-let readdirRecursive = require('fs-readdir-recursive');
-var Plugin = require('broccoli-plugin');
-var path = require('path');
+var AstTransform = require('./lib/ast-transform');
+var BroccoliFilter = require('broccoli-filter');
+var postcss = require('postcss');
+// var BroccoliPlugin = require('broccoli-plugin');
+// let readdirRecursive = require('fs-readdir-recursive');
 
-// Create a subclass MyPlugin derived from Plugin
-FindUsedIcons.prototype = Object.create(Plugin.prototype);
-FindUsedIcons.prototype.constructor = FindUsedIcons;
-function FindUsedIcons(inputNodes, options) {
-  options = options || {};
-  Plugin.call(this, inputNodes, {
-    annotation: options.annotation || 'FindUsedIcons'
-  });
-  this.options = options;
+function buildPlugin(addon) {
+  return class EmberFontAwesomeAstTransform extends AstTransform {
+    constructor(options) {
+      super(options);
+      this.addon = addon;
+    }
+  }
 }
 
-FindUsedIcons.prototype.build = function() {
-  let options = this.options;
-  this.inputPaths.forEach(function(inputPath) {
-    let filePaths = readdirRecursive(inputPath);
-    filePaths.forEach(function(filePath) {
-      let usedIcons = options.usedFaIcons[filePath] = new Set();
-      let content = fs.readFileSync(path.join(inputPath, filePath), 'utf8');
-      let ast = glimmerSyntax.preprocess(content);
-      glimmerSyntax.traverse(ast, {
-        MustacheStatement(node) {
-          if (node.path.original === 'fa-icon') {
-            let iconValue = node.params[0];
-            if (!iconValue) {
-              let pair = node.hash.pairs.find(pair => pair.key === 'icon');
-              if (pair) {
-                iconValue = pair.value;
-              }
-            }
-            if (iconValue.type === 'StringLiteral') {
-              usedIcons.add(iconValue.value);
-            }
+class PruneUnusedIcons extends BroccoliFilter {
+  constructor(inputNodes, options) {
+    super(inputNodes, options)
+    this.options = options;
+    this.targetFiles = ['assets/vendor.css'];
+    this.postcss = postcss.plugin('postcss-remove-unused-fa-icons', () => {
+      return root => {
+        root.walkRules(rule => {
+          let matchData = rule.selector.match(/\.fa-(.*):before/);
+          if (matchData !== null && !this.options.addon.usedFaIcons.has(matchData[1])) {
+            rule.remove();
           }
-        }
-      });
+        });
+      };
     });
-  });
-};
+  }
 
+  processString(str /*, relativePath */) {
+    if (this.options.addon.usedFaIcons.has('POSSIBLY_ALL')) {
+      return str;
+    }
+    return this.postcss.process(str).css;
+  }
 
+  getDestFilePath(relativePath) {
+    if (this.targetFiles.includes(relativePath)) {
+      return relativePath;
+    }
+    return null;
+  }
+}
 
 module.exports = {
   name: 'ember-font-awesome',
@@ -59,16 +59,16 @@ module.exports = {
   setupPreprocessorRegistry(type, registry) {
     registry.add('htmlbars-ast-plugin', {
       name: 'font-awesome-static-transform',
-      plugin: astTransform,
+      plugin: buildPlugin(this),
       baseDir() {
         return __dirname;
       }
     });
   },
 
-  preprocessTree(type, tree) {
-    if (type === 'template') {
-      return new FindUsedIcons([tree], { usedFaIcons: this.usedFaIcons });
+  postprocessTree(type, tree) {
+    if (type === 'all') {
+      return new PruneUnusedIcons(tree, { addon: this });
     }
     return tree;
   },
@@ -91,13 +91,8 @@ module.exports = {
     });
   },
 
-  postBuild() {
-    let usedIcons = Array.from(Object.values(this.usedFaIcons).reduce((acum, set)=> new Set([...acum, ...set])));
-    console.log(`The app uses ${usedIcons.length} icons`);
-  },
-
-  included: function(app, parentAddon) {
-    this.usedFaIcons = {};
+  included(app, parentAddon) {
+    this.usedFaIcons = new Set();
     // Quick fix for add-on nesting
     // https://github.com/aexmachina/ember-cli-sass/blob/v5.3.0/index.js#L73-L75
     // see: https://github.com/ember-cli/ember-cli/issues/3718
