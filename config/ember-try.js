@@ -2,26 +2,6 @@
 module.exports = {
   scenarios: [
     {
-      name: 'ember-lts-2.4',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#lts-2-4'
-        },
-        resolutions: {
-          'ember': 'lts-2-4'
-        }
-      },
-      npm: {
-        dependencies: {
-          'ember-cli-babel': '5.2.4'
-        },
-        devDependencies: {
-          'ember-cli-htmlbars-inline-precompile': '0.3.11',
-          'ember-source': null
-        }
-      }
-    },
-    {
       name: 'ember-lts-2.8',
       bower: {
         dependencies: {
@@ -42,18 +22,10 @@ module.exports = {
       }
     },
     {
-      name: 'ember-2.10',
-      bower: {
-        dependencies: {
-          'ember': 'components/ember#2.10.2'
-        },
-        resolutions: {
-          'ember': '2-10-2'
-        }
-      },
+      name: 'ember-lts-2.12',
       npm: {
         devDependencies: {
-          'ember-source': null
+          'ember-source': '~2.12.0'
         }
       }
     },
