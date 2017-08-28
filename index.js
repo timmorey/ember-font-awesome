@@ -74,17 +74,17 @@ module.exports = {
 
     // Per the ember-cli documentation
     // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
-    var target = (parentAddon || app);
+    let target = (parentAddon || app);
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
-    var options = target.options['ember-font-awesome'] || {};
+    let options = target.options['ember-font-awesome'] || {};
 
     this.hostBuildOptions = options;
 
-    var scssPath = path.join(faPath, 'scss');
-    var lessPath = path.join(faPath, 'less');
-    var cssPath = 'vendor/font-awesome/css';
-    var fontsPath = 'vendor/font-awesome/fonts';
-    var absoluteFontsPath = path.join(faPath, 'fonts');
+    let scssPath = path.join(faPath, 'scss');
+    let lessPath = path.join(faPath, 'less');
+    let cssPath = 'vendor/font-awesome/css';
+    let fontsPath = 'vendor/font-awesome/fonts';
+    let absoluteFontsPath = path.join(faPath, 'fonts');
 
     // Ensure the font-awesome path is added to the ember-cli-sass addon options
     // (Taking a cue from the Babel options above)
@@ -122,12 +122,12 @@ module.exports = {
     // Import all files in the fonts folder when option not defined or enabled
     if (!('includeFontFiles' in options) || options.includeFontFiles) {
       // Get all of the font files
-      var fontsToImport = fs.readdirSync(absoluteFontsPath);
-      var filesInFonts  = []; // Bucket for filenames already in the fonts folder
-      var fontsSkipped  = []; // Bucket for fonts not imported because they already have been
+      let fontsToImport = fs.readdirSync(absoluteFontsPath);
+      let filesInFonts  = []; // Bucket for filenames already in the fonts folder
+      let fontsSkipped  = []; // Bucket for fonts not imported because they already have been
 
       // Find files already imported into the fonts folder
-      var fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';
+      let fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';
       target.otherAssetPaths.forEach(function(asset){
         if (asset.dest && asset.dest.indexOf(fontsFolderPath) !== -1) {
           filesInFonts.push(asset.file);
