@@ -1,57 +1,13 @@
 /* eslint-env node */
 'use strict';
 
-var chalk = require('chalk');
-var fs = require('fs');
-var path = require('path');
-var Funnel = require('broccoli-funnel');
-var faPath = path.dirname(require.resolve('font-awesome/package.json'));
-var AstTransform = require('./lib/ast-transform');
-var BroccoliFilter = require('broccoli-filter');
-var postcss = require('postcss');
-// var BroccoliPlugin = require('broccoli-plugin');
-// let readdirRecursive = require('fs-readdir-recursive');
-
-function buildPlugin(addon) {
-  return class EmberFontAwesomeAstTransform extends AstTransform {
-    constructor(options) {
-      super(options);
-      this.addon = addon;
-    }
-  }
-}
-
-class PruneUnusedIcons extends BroccoliFilter {
-  constructor(inputNodes, options) {
-    super(inputNodes, options)
-    this.options = options;
-    this.targetFiles = ['assets/vendor.css'];
-    this.postcss = postcss.plugin('postcss-remove-unused-fa-icons', () => {
-      return root => {
-        root.walkRules(rule => {
-          let matchData = rule.selector.match(/\.fa-(.*):before/);
-          if (matchData !== null && !this.options.addon.usedFaIcons.has(matchData[1])) {
-            rule.remove();
-          }
-        });
-      };
-    });
-  }
-
-  processString(str /*, relativePath */) {
-    if (this.options.addon.usedFaIcons.has('POSSIBLY_ALL')) {
-      return str;
-    }
-    return this.postcss.process(str).css;
-  }
-
-  getDestFilePath(relativePath) {
-    if (this.targetFiles.includes(relativePath)) {
-      return relativePath;
-    }
-    return null;
-  }
-}
+const chalk = require('chalk');
+const fs = require('fs');
+const path = require('path');
+const Funnel = require('broccoli-funnel');
+const faPath = path.dirname(require.resolve('font-awesome/package.json'));
+const buildAstTransform = require('./lib/ast-transform');
+const PruneUnusedIcons = require('./lib/prune-css');
 
 module.exports = {
   name: 'ember-font-awesome',
@@ -59,7 +15,7 @@ module.exports = {
   setupPreprocessorRegistry(type, registry) {
     registry.add('htmlbars-ast-plugin', {
       name: 'font-awesome-static-transform',
-      plugin: buildPlugin(this),
+      plugin: buildAstTransform(this),
       baseDir() {
         return __dirname;
       }
@@ -73,7 +29,7 @@ module.exports = {
     return tree;
   },
 
-  treeForVendor: function() {
+  treeForVendor() {
     // Get configured fontFormats
     let fontFormats = this.hostBuildOptions.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
     let fontFormatsString = fontFormats.join(',');
