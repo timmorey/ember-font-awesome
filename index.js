@@ -23,7 +23,7 @@ module.exports = {
   },
 
   postprocessTree(type, tree) {
-    if (type === 'all') {
+    if (this.app.env === 'production' && type === 'all') {
       return new PruneUnusedIcons(tree, { addon: this });
     }
     return tree;
