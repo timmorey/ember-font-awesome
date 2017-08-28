@@ -48,7 +48,10 @@ module.exports = {
   },
 
   included(app, parentAddon) {
-    this.usedFaIcons = new Set();
+    this.fontAwesomeUsage = {
+      usedIcons: new Set(),
+      usedIconsUnknown: false,
+    };
     // Quick fix for add-on nesting
     // https://github.com/aexmachina/ember-cli-sass/blob/v5.3.0/index.js#L73-L75
     // see: https://github.com/ember-cli/ember-cli/issues/3718
