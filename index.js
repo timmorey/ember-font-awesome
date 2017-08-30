@@ -130,8 +130,8 @@ module.exports = {
       let fontsSkipped  = []; // Bucket for fonts not imported because they already have been
 
       // Find files already imported into the fonts folder
-      let fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';
-      target.otherAssetPaths.forEach(function(asset){
+      let fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';      
+      (target.otherAssetPaths || []).forEach(function(asset){
         if (asset.dest && asset.dest.indexOf(fontsFolderPath) !== -1) {
           filesInFonts.push(asset.file);
         }
