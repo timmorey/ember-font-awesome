@@ -102,6 +102,13 @@ test("Setting the fixedWidth to a bound value also works", function(assert) {
   assert.ok($icon.hasClass('fa-fw'), "The <i> element should have the 'fa-fw' class");
 });
 
+test("Setting the fixedWidth to a subexpression also works", function(assert) {
+  this.set('isFixed', true);
+  this.render(hbs`{{fa-icon icon="fa-credit-card" fixedWidth=(if isFixed true)}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-fw'), "The <i> element should have the 'fa-fw' class");
+});
+
 // listItem
 test("Setting the listItem property adds the 'fa-li' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" listItem=true}}`);
@@ -116,6 +123,13 @@ test("Setting the listItem to a bound value also works", function(assert) {
   assert.ok($icon.hasClass('fa-li'), "The <i> element should have the 'fa-li' class");
 });
 
+test("Setting the listItem to a subexpression value also works", function(assert) {
+  this.set('isList', true);
+  this.render(hbs`{{fa-icon icon="fa-credit-card" listItem=(if isList true)}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-li'), "The <i> element should have the 'fa-li' class");
+});
+
 // border
 test("Setting the border property adds the 'fa-border' class", function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" border=true}}`);
@@ -126,6 +140,13 @@ test("Setting the border property adds the 'fa-border' class", function(assert) 
 test("Setting the border property to a bound value also works", function(assert) {
   this.set('hasBorder', true);
   this.render(hbs`{{fa-icon icon="fa-credit-card" border=hasBorder}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass('fa-border'), "The <i> element should have the 'fa-border' class");
+});
+
+test("Setting the border property to a subexpression also works", function(assert) {
+  this.set('hasBorder', true);
+  this.render(hbs`{{fa-icon icon="fa-credit-card" border=(if hasBorder true)}}`);
   let $icon = this.$('i');
   assert.ok($icon.hasClass('fa-border'), "The <i> element should have the 'fa-border' class");
 });
@@ -243,22 +264,22 @@ test(`I can set the the flip property to a bound value`, function(assert) {
   assert.ok($icon.hasClass(`fa-flip-vertical`), `The <i> element should have the 'fa-flip-vertical' class`);
 });
 
-// stack
-[1, 2].forEach((size) => {
-  test(`I can set the stack property as a number - stack=${size}`, function(assert) {
-    this.set('size', size);
-    this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
-    let $icon = this.$('i');
-    assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
-  });
+// // stack
+// [1, 2].forEach((size) => {
+//   test(`I can set the stack property as a number - stack=${size}`, function(assert) {
+//     this.set('size', size);
+//     this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
+//     let $icon = this.$('i');
+//     assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
+//   });
 
-  test(`I can set the stack property as a string - stack="${size}"`, function(assert) {
-    this.set('size', `${size}`);
-    this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
-    let $icon = this.$('i');
-    assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
-  });
-});
+//   test(`I can set the stack property as a string - stack="${size}"`, function(assert) {
+//     this.set('size', `${size}`);
+//     this.render(hbs`{{fa-icon icon="fa-credit-card" stack=size}}`);
+//     let $icon = this.$('i');
+//     assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
+//   });
+// });
 
 // inverse
 test("Setting the inverse property adds the 'fa-inverse' class", function(assert) {
@@ -334,7 +355,7 @@ test('I can set the title attribute to a bound value', function(assert) {
 
 test('I can set the title attribute to a subexpression', function(assert) {
   this.set('title', 'foo bar');
-  this.render(hbs`{{fa-icon icon="fa-credit-card" title=(concat "foo" "" "bar")}}`);
+  this.render(hbs`{{fa-icon icon="fa-credit-card" title=(concat "foo" " " "bar")}}`);
   let $icon = this.$('i');
   assert.equal($icon.attr('title'), 'foo bar', "The title attribute of the <i> element should be 'foo bar'");
 });
@@ -351,7 +372,8 @@ test('I can set the color to a bound value', function(assert) {
   this.render(hbs`{{fa-icon icon="fa-credit-card" color=color}}`);
   let $icon = this.$('i');
   assert.equal($icon.attr('style'), "color:#ff00ff", "The style attribute of the <i> element contains the right color");
-  this.set()
+  this.set('color', undefined);
+  assert.equal($icon.attr('style'), undefined, "The style attribute of the <i> element contains the right color");
 });
 
 // tagName
