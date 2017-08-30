@@ -1,6 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { skip } from 'qunit';
 
 moduleForComponent('fa-stack', 'Integration | Component | {{fa-stack}}', {
   integration: true
@@ -30,13 +29,6 @@ test(`I can set the size property to 'lg'`, function(assert) {
 
   test(`I can set the size property as a string - size="${size}"`, function(assert) {
     this.set('size', `${size}`);
-    this.render(hbs`{{fa-stack size=size}}`);
-    let $stack = this.$('span');
-    assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
-  });
-
-  skip(`I can set this size property as a string - size="${size}x"`, function(assert) {
-    this.set('size', `${size}x`);
     this.render(hbs`{{fa-stack size=size}}`);
     let $stack = this.$('span');
     assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
