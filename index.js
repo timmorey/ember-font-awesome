@@ -69,9 +69,10 @@ module.exports = {
 
     if (!parentAddon && typeof app.import !== 'function') {
       throw new Error('ember-font-awesome is being used within another addon or engine and is' +
-        ' having trouble registering itself to the parent application.');
+      ' having trouble registering itself to the parent application.');
     }
 
+    this.app = app;
     // https://github.com/ember-cli/ember-cli/issues/3718#issuecomment-88122543
     this._super.included.call(this, app);
 
