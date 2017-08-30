@@ -1,17 +1,35 @@
 /* eslint-env node */
 'use strict';
 
-var chalk = require('chalk');
-var fs = require('fs');
-var path = require('path');
-var Funnel = require('broccoli-funnel');
-
-var faPath = path.dirname(require.resolve('font-awesome/package.json'));
+const chalk = require('chalk');
+const fs = require('fs');
+const path = require('path');
+const Funnel = require('broccoli-funnel');
+const faPath = path.dirname(require.resolve('font-awesome/package.json'));
+const buildAstTransform = require('./lib/ast-transform');
+const PruneUnusedIcons = require('./lib/prune-css');
 
 module.exports = {
   name: 'ember-font-awesome',
 
-  treeForVendor: function() {
+  setupPreprocessorRegistry(type, registry) {
+    registry.add('htmlbars-ast-plugin', {
+      name: 'font-awesome-static-transform',
+      plugin: buildAstTransform(this),
+      baseDir() {
+        return __dirname;
+      }
+    });
+  },
+
+  postprocessTree(type, tree) {
+    if (this.app.env === 'production' && type === 'all') {
+      return new PruneUnusedIcons(tree, { addon: this });
+    }
+    return tree;
+  },
+
+  treeForVendor() {
     // Get configured fontFormats
     let fontFormats = this.hostBuildOptions.fontFormats || ['eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'];
     let fontFormatsString = fontFormats.join(',');
@@ -29,8 +47,11 @@ module.exports = {
     });
   },
 
-  included: function(app, parentAddon) {
-
+  included(app, parentAddon) {
+    this.fontAwesomeUsage = {
+      usedIcons: new Set(),
+      usedIconsUnknown: false,
+    };
     // Quick fix for add-on nesting
     // https://github.com/aexmachina/ember-cli-sass/blob/v5.3.0/index.js#L73-L75
     // see: https://github.com/ember-cli/ember-cli/issues/3718
@@ -56,17 +77,17 @@ module.exports = {
 
     // Per the ember-cli documentation
     // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
-    var target = (parentAddon || app);
+    let target = (parentAddon || app);
     target.options = target.options || {}; // Ensures options exists for Scss/Less below
-    var options = target.options['ember-font-awesome'] || {};
+    let options = target.options['ember-font-awesome'] || {};
 
     this.hostBuildOptions = options;
 
-    var scssPath = path.join(faPath, 'scss');
-    var lessPath = path.join(faPath, 'less');
-    var cssPath = 'vendor/font-awesome/css';
-    var fontsPath = 'vendor/font-awesome/fonts';
-    var absoluteFontsPath = path.join(faPath, 'fonts');
+    let scssPath = path.join(faPath, 'scss');
+    let lessPath = path.join(faPath, 'less');
+    let cssPath = 'vendor/font-awesome/css';
+    let fontsPath = 'vendor/font-awesome/fonts';
+    let absoluteFontsPath = path.join(faPath, 'fonts');
 
     // Ensure the font-awesome path is added to the ember-cli-sass addon options
     // (Taking a cue from the Babel options above)
@@ -104,12 +125,12 @@ module.exports = {
     // Import all files in the fonts folder when option not defined or enabled
     if (!('includeFontFiles' in options) || options.includeFontFiles) {
       // Get all of the font files
-      var fontsToImport = fs.readdirSync(absoluteFontsPath);
-      var filesInFonts  = []; // Bucket for filenames already in the fonts folder
-      var fontsSkipped  = []; // Bucket for fonts not imported because they already have been
+      let fontsToImport = fs.readdirSync(absoluteFontsPath);
+      let filesInFonts  = []; // Bucket for filenames already in the fonts folder
+      let fontsSkipped  = []; // Bucket for fonts not imported because they already have been
 
       // Find files already imported into the fonts folder
-      var fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';
+      let fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';      
       (target.otherAssetPaths || []).forEach(function(asset){
         if (asset.dest && asset.dest.indexOf(fontsFolderPath) !== -1) {
           filesInFonts.push(asset.file);

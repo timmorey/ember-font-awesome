@@ -33,13 +33,6 @@ test(`I can set the size property to 'lg'`, function(assert) {
     let $stack = this.$('span');
     assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
   });
-
-  test(`I can set this size property as a string - size="${size}x"`, function(assert) {
-    this.set('size', `${size}x`);
-    this.render(hbs`{{fa-stack size=size}}`);
-    let $stack = this.$('span');
-    assert.ok($stack.hasClass(`fa-${size}x`), `The <span> element should have the 'fa-${size}x' class`);
-  });
 });
 
 test('A block with stack contextual components is yielded', function(assert) {
@@ -52,4 +45,6 @@ test('A block with stack contextual components is yielded', function(assert) {
 
   let $icons = this.$('i');
   assert.equal($icons.length, 2);
+  assert.ok($icons[0].classList.contains('fa-stack-2x'), 'The second icon has stack 2x');
+  assert.ok($icons[1].classList.contains('fa-stack-1x'), 'The second icon has stack 1x');
 });
