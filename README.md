@@ -36,14 +36,13 @@ Addon version         | Ember version | Addon name
 The version 4.0.0 of this addon introduces an entirely new approach in which the addon contains no components and has 0 runtime overhead. Instead, all usages of `{{fa-icon}}`,
 `{{fa-list}}` and `{{fa-stack}}` are transformed into the right markup in compile-time.
 
-To achieve this we had to make the component a bit more constrained to it can be compiled
+To achieve this we had to make the component a bit more constrained so it can be compiled
 statically. There is a few (edge) cases that we had to drop to achieve that:
 
 - `{{fa-icon tagName=boundValue}}`. You cannot pass a bound value to the tag name (you still can pass a fixed value like `{{fa-icon tagName="span"}}`)
 - Previously both `{{fa-icon "credit-card"}}` and `{{fa-icon "fa-credit-card"}}` were valid invocations. Now only the first one is. You should not include the `fa-` prefix on the icon names.
 - Previously both `{{fa-icon size="2"}}` and `{{fa-icon size="2x"}}` were valid sizes. Now only the first one is, you cannot pass a string ending in `x`.
-This version has several breaking changes.
-- It requires node >= 6
+- It requires node >= 6 (working on making it 4.5+ soon)
 - It requires a Glimmer2 version of Ember (2.10 or bigger)
 - Before this version, you could manually type `<i class="fa fa-some-icon"></i>` and it would work. Now, since
   we use compile-time analysis to remove unused icons from the CSS, the above approach won't work in production. You **have**
