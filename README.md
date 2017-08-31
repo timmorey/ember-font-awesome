@@ -42,7 +42,6 @@ statically. There is a few (edge) cases that we had to drop to achieve that:
 - `{{fa-icon tagName=boundValue}}`. You cannot pass a bound value to the tag name (you still can pass a fixed value like `{{fa-icon tagName="span"}}`)
 - Previously both `{{fa-icon "credit-card"}}` and `{{fa-icon "fa-credit-card"}}` were valid invocations. Now only the first one is. You should not include the `fa-` prefix on the icon names.
 - Previously both `{{fa-icon size="2"}}` and `{{fa-icon size="2x"}}` were valid sizes. Now only the first one is, you cannot pass a string ending in `x`.
-- It requires node >= 6 (working on making it 4.5+ soon)
 - It requires a Glimmer2 version of Ember (2.10 or bigger)
 - Before this version, you could manually type `<i class="fa fa-some-icon"></i>` and it would work. Now, since
   we use compile-time analysis to remove unused icons from the CSS, the above approach won't work in production. You **have**
