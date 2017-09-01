@@ -7,5 +7,17 @@ module.exports = {
     'Chrome'
   ],
   launch_in_dev: [
-  ]
+    'Chrome'
+  ],
+  'browser_args': {
+    'Chrome': [
+      '--touch-events',
+      '--disable-gpu',
+      '--headless',
+      '--remote-debugging-port=9222'
+    ],
+    'Firefox': [
+      '-headless'
+    ]
+  }
 };
