@@ -8,12 +8,8 @@ node_js:
 dist: trusty
 sudo: required
 
-# addons:
-#   apt:
-#     sources:
-#     - google-chrome
-#     packages:
-#     - google-chrome-stable
+addons:
+  firefox: "latest"
 
 cache:
   yarn: true
