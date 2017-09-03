@@ -1,8 +1,11 @@
 <div class="row">
   <div class="col-xs-12">
     <ul class="plain">
-      <li>{{fa-icon icon='adjust' fixedWidth=true ariaHidden=false}} <span class="name">adjust</span></li>
+      {{#fa-list as |l|}}
+        <li>{{l.fa-icon icon="star"}}Item 1</li>
+      {{/fa-list}}
       {{!--
+      <li>{{fa-icon icon='adjust' fixedWidth=true}} <span class="name">adjust</span></li>
       <li>{{fa-icon icon='adn' fixedWidth=true}} <span class="name">adn</span></li>
       <li>{{fa-icon icon='align-center' fixedWidth=true}} <span class="name">align-center</span></li>
       <li>{{fa-icon icon='align-justify' fixedWidth=true}} <span class="name">align-justify</span></li>
