@@ -265,22 +265,32 @@ test(`I can set the the flip property to a bound value`, function(assert) {
   assert.ok($icon.hasClass(`fa-flip-vertical`), `The <i> element should have the 'fa-flip-vertical' class`);
 });
 
-// // stack
-// [1, 2].forEach((size) => {
-//   test(`I can set the stack property as a number - stack=${size}`, function(assert) {
-//     this.set('size', size);
-//     this.render(hbs`{{fa-icon icon="credit-card" stack=size}}`);
-//     let $icon = this.$('i');
-//     assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
-//   });
+// stack
+test(`I can set the stack property as a number`, function(assert) {
+  this.render(hbs`{{fa-icon icon="credit-card" stack=1}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass(`fa-stack-1x`), `The <i> element should have the 'fa-stack-1x' class`);
+});
 
-//   test(`I can set the stack property as a string - stack="${size}"`, function(assert) {
-//     this.set('size', `${size}`);
-//     this.render(hbs`{{fa-icon icon="credit-card" stack=size}}`);
-//     let $icon = this.$('i');
-//     assert.ok($icon.hasClass(`fa-stack-${size}x`), `The <i> element should have the 'fa-stack-${size}x' class`);
-//   });
-// });
+test(`I can set the stack property as a string`, function(assert) {
+  this.render(hbs`{{fa-icon icon="credit-card" stack="2"}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass(`fa-stack-2x`), `The <i> element should have the 'fa-stack-2x' class`);
+});
+
+test(`I can set the stack property to a boundValue`, function(assert) {
+  this.set('stack', 2);
+  this.render(hbs`{{fa-icon icon="credit-card" stack=stack}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass(`fa-stack-2x`), `The <i> element should have the 'fa-stack-2x' class`);
+});
+
+test(`I can set the stack property to a subexpression`, function(assert) {
+  this.set('big', true);
+  this.render(hbs`{{fa-icon icon="credit-card" stack=(if big 2 1)}}`);
+  let $icon = this.$('i');
+  assert.ok($icon.hasClass(`fa-stack-2x`), `The <i> element should have the 'fa-stack-2x' class`);
+});
 
 // inverse
 test("Setting the inverse property adds the 'fa-inverse' class", function(assert) {
