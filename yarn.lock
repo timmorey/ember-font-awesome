@@ -1878,9 +1878,9 @@ ember-ajax@^3.0.0:
   dependencies:
     ember-cli-babel "^6.0.0"
 
-ember-ast-helpers@0.1.13:
-  version "0.1.13"
-  resolved "https://registry.yarnpkg.com/ember-ast-helpers/-/ember-ast-helpers-0.1.13.tgz#981ba984c1008469f4d1ab9ebd8157fe043b4e08"
+ember-ast-helpers@0.1.15:
+  version "0.1.15"
+  resolved "https://registry.yarnpkg.com/ember-ast-helpers/-/ember-ast-helpers-0.1.15.tgz#07305ec4f7226bf109ddc6f535ec224071d5ba64"
   dependencies:
     "@glimmer/compiler" "^0.27.0"
     "@glimmer/syntax" "^0.27.0"
