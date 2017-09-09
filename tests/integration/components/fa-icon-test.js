@@ -15,6 +15,14 @@ test("An <i> element with the class 'fa' is rendered", function(assert) {
   assert.ok($icon.hasClass('fa'), "The <i> element should have the 'fa' class");
 });
 
+test("An <i> element with the given id is rendered", function(assert) {
+  this.render(hbs`{{fa-icon id="sample-id"}}`);
+
+  let $icon = this.$('i');
+  assert.equal($icon.length, 1, 'An <i> element is rendered');
+  assert.equal($icon.attr('id'), "sample-id", "The <i> element should have the right id attribute");
+});
+
 test("'undefined' is not present in the class list", function(assert) {
   this.render(hbs`{{fa-icon}}`);
   let { className } = this.$('i').get(0);
