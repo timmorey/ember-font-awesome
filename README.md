@@ -46,7 +46,7 @@ statically. There is a few (edge) cases that we had to drop to achieve that:
 - Before this version, you could manually type `<i class="fa fa-some-icon"></i>` and it would work. Now, since
   we use compile-time analysis to remove unused icons from the CSS, the above approach won't work in production. You **have**
   to use the `{{fa-icon}}` helper.
-- It requires node >= 6 (working on making it 4.5+ soon)
+- **It requires node >= 6** (working on making it 4.5+ soon)
 - If you use this addon from within another addon, you have to move it from `devDependencies` to `dependencies` in your `package.json`.
 
 In return you get a an addon with 0 runtime overhead, that ships 0 bytes of javascript code
