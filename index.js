@@ -110,6 +110,16 @@ module.exports = {
       }
     }
 
+    // Force inclusion of some icons that would otherwise by removed in post processing
+    if ('includeStaticIcons' in options && options.includeStaticIcons.length) {
+      options.includeStaticIcons.forEach(icon => {
+        if (icon.indexOf('fa-') !== -1) {
+          icon = icon.substring(3);
+        }
+        this.fontAwesomeUsage.usedIcons.add(icon);
+      });
+    }
+
     // Early out if no assets should be imported
     if ('includeFontAwesomeAssets' in options && !options.includeFontAwesomeAssets) {
       return;
@@ -131,7 +141,7 @@ module.exports = {
       let fontsSkipped  = []; // Bucket for fonts not imported because they already have been
 
       // Find files already imported into the fonts folder
-      let fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';      
+      let fontsFolderPath = options.fontsOutput ? options.fontsOutput : '/fonts';
       (target.otherAssetPaths || []).forEach(function(asset){
         if (asset.dest && asset.dest.indexOf(fontsFolderPath) !== -1) {
           filesInFonts.push(asset.file);
