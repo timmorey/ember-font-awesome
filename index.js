@@ -20,7 +20,7 @@ module.exports = {
         return __dirname;
       },
       cacheKey() {
-        return  process.env.EMBER_CLI_FONT_AWESOME_DISABLE_CACHE ? new Date.now() : null;
+        return  process.env.EMBER_CLI_FONT_AWESOME_DISABLE_CACHE ? Date.now() : null;
       }
     });
   },
