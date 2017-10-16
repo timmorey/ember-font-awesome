@@ -311,10 +311,25 @@ var app = new EmberApp({
 });
 ```
 
+### Remove unused icons
+
+This addon includes a functionality to detect the used icons and remove the ones you don't use.
+By default this feature is only enabled when `environment` is `'production'`, but you can force it
+to be enabled or disabled.
+
+```js
+var app = new EmberApp({
+  'ember-font-awesome': {
+    removeUnusedIcons: false // The addon will not remove unused icons, not even in production.
+  }
+});
+```
+
 ### Including specific icons
 
-This addon will strip out unused icons which are not used in your app. If you
-want to use `<i class="fa fa-sort"></i>` you can  force the inclusion of specific icons by adding the following configuration in `ember-cli-build.js`:
+By default this addon detects which icons are used based on the invocation parameters of `{{fa-icon}}`,
+and removes the rest, but you can whitelist in `ember-cli-build.js` some specific icons to be always
+included regardless of if they are used or not:
 
 ```js
 var app = new EmberApp({
