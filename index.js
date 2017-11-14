@@ -52,6 +52,7 @@ module.exports = {
   },
 
   included(app, parentAddon) {
+    console.log(`included(${app}, ${parentAddon})`);
     this.fontAwesomeUsage = {};
     this.includeStaticIcons = new Set();
     // Quick fix for add-on nesting
@@ -76,7 +77,9 @@ module.exports = {
 
     this.app = app;
     // https://github.com/ember-cli/ember-cli/issues/3718#issuecomment-88122543
+    console.log(`calling super`);
     this._super.included.call(this, app);
+    console.log(`called super`);
 
     // Per the ember-cli documentation
     // http://ember-cli.com/extending/#broccoli-build-options-for-in-repo-addons
