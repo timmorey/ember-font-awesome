@@ -151,6 +151,11 @@ module.exports = {
         }
       });
 
+      console.log(`fontsToImport: ${fontsToImport}`);
+      console.log(`target.otherAssetPaths: ${target.otherAssetPaths}`);
+      console.log(`fontsFolderPath: ${fontsFolderPath}`);
+      console.log(`filesInFonts: ${filesInFonts}`);
+
       // Attempt to import each font, if not already imported
       fontsToImport.forEach(function(fontFilename){
         if (filesInFonts.indexOf(fontFilename) > -1) {
